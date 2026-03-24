@@ -1,0 +1,37 @@
+.placeholder {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  text-align: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, var(--card), var(--card2));
+  padding: 2rem;
+}
+
+.placeholder__icon {
+  font-size: clamp(3rem, 8vw, 5rem);
+  opacity: 0.72;
+}
+
+.placeholder__title {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 700;
+}
+
+.placeholder__sub {
+  max-width: 560px;
+}
+
+.placeholder__badge {
+  margin-top: 0.3rem;
+  background: var(--card2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.3rem 0.7rem;
+  color: var(--warning);
+  font-size: 0.78rem;
+}

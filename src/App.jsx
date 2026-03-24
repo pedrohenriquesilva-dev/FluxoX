@@ -1,12 +1,14 @@
+import { useState } from "react";
+import Layout from "./components/ui/Layout.jsx";
+import Placeholder from "./pages/Placeholder.jsx";
+
 function App() {
+  const [page, setPage] = useState("dashboard");
+
   return (
-    <div className="app-preview">
-      <h1 className="app-title">FluxoX</h1>
-      <p className="app-subtitle">Controle Financeiro Pessoal</p>
-      <p className="app-note">
-        Projeto em construcao - acompanhe os commits diarios no GitHub.
-      </p>
-    </div>
+    <Layout currentPage={page} onNavigate={setPage}>
+      <Placeholder page={page} />
+    </Layout>
   );
 }
 

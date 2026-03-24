@@ -1,40 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Sora:wght@400;500;600;700;800&display=swap");
+
 :root {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  color: #1b1f2a;
-  background-color: #f5f8ff;
+  --bg: #0e1320;
+  --card: #121a2b;
+  --card2: #1a2440;
+  --border: #2b3657;
+  --text: #eaf0ff;
+  --muted: #9aa8cb;
+  --accent: #5b8af5;
+  --success: #2dcf95;
+  --danger: #ff6b7a;
+  --warning: #ffc35a;
+  --font: "Sora", system-ui, -apple-system, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --sidebar-w: 280px;
 }
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--card);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--card2);
+  border-radius: 999px;
+  border: 2px solid var(--card);
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
 }
 
 body {
-  margin: 0;
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-  background: radial-gradient(circle at 20% 20%, #ffffff 0%, #e7eefb 45%, #dbe5fa 100%);
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--bg);
 }
 
-.app-preview {
-  text-align: center;
-  padding: 2rem;
+.text-muted {
+  color: var(--muted);
 }
 
-.app-title {
-  margin: 0;
-  font-size: clamp(2rem, 6vw, 3rem);
-  color: #5b8af5;
+.text-success {
+  color: var(--success);
 }
 
-.app-subtitle {
-  margin: 0.75rem 0 0;
-  color: #5e6574;
-  font-size: 1rem;
+.text-danger {
+  color: var(--danger);
 }
 
-.app-note {
-  margin: 1.5rem 0 0;
-  color: #80889b;
-  font-size: 0.9rem;
+.text-warning {
+  color: var(--warning);
+}
+
+.text-accent {
+  color: var(--accent);
+}
+
+.font-mono {
+  font-family: var(--mono);
 }
