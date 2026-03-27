@@ -75,3 +75,39 @@ body {
 .font-mono {
   font-family: var(--mono);
 }
+.day5 {
+  display: grid;
+  gap: 1.2rem;
+}
+
+.day5__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.day5__title {
+  font-size: clamp(1.25rem, 2.4vw, 1.8rem);
+}
+
+.day5__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.9rem;
+}
+
+.day5__button {
+  border: 1px solid var(--border);
+  background: var(--accent);
+  color: var(--text);
+  border-radius: var(--radius-sm);
+  padding: 0.55rem 0.9rem;
+  font: inherit;
+  cursor: pointer;
+}
+
+.day5__button--ghost {
+  background: var(--card2);
+  color: var(--text);
+}
