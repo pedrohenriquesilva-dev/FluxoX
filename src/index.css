@@ -111,3 +111,31 @@ body {
   background: var(--card2);
   color: var(--text);
 }
+
+.day6__list {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  padding: 1rem;
+}
+
+.day6__list-title {
+  margin-bottom: 0.7rem;
+  font-size: 1rem;
+}
+
+.day6__items {
+  list-style: none;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.day6__item {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--card2);
+  padding: 0.55rem 0.7rem;
+}

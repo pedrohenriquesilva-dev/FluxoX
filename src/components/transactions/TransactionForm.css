@@ -1,0 +1,51 @@
+.transaction-form {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, var(--card), var(--card2));
+  padding: 1rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.transaction-form__header {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.transaction-form__title {
+  font-size: 1.2rem;
+}
+
+.transaction-form__hint {
+  font-size: 0.9rem;
+}
+
+.transaction-form__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.8rem;
+}
+
+.transaction-form__select-wrap {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.transaction-form__select {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--card);
+  color: var(--text);
+  font: inherit;
+  padding: 0.65rem 0.75rem;
+}
+
+.transaction-form__footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.transaction-form__footer .day5__button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
