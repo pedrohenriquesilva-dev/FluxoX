@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Field from "../ui/Field.jsx";
 import { CATEGORIES, PAYMENT_METHODS, TRANSACTION_TYPES } from "../../utils/constants.js";
 import { generateId, normalizeMoneyInput } from "../../utils/formatters.js";
@@ -21,9 +21,12 @@ function toInputDate(date = new Date()) {
 
 export default function TransactionForm({
   mode = TRANSACTION_TYPES.EXPENSE,
-  onSubmit
+  initial = null,
+  onSubmit,
+  onCancelEdit
 }) {
-  const copy = FORM_TEXT[mode] ?? FORM_TEXT[TRANSACTION_TYPES.EXPENSE];
+  const effectiveMode = initial?.type ?? mode;
+  const copy = FORM_TEXT[effectiveMode] ?? FORM_TEXT[TRANSACTION_TYPES.EXPENSE];
   const [form, setForm] = useState({
     description: "",
     value: "",
@@ -32,6 +35,18 @@ export default function TransactionForm({
     date: toInputDate()
   });
   const [error, setError] = useState("");
+  const isEditing = Boolean(initial?.id);
+
+  useEffect(() => {
+    if (!initial) return;
+    setForm({
+      description: initial.description ?? "",
+      value: String(initial.value ?? ""),
+      category: initial.category ?? CATEGORIES[0],
+      method: initial.method ?? PAYMENT_METHODS[0],
+      date: initial.date ?? toInputDate()
+    });
+  }, [initial]);
 
   const canSubmit = useMemo(
     () => form.description.trim() && normalizeMoneyInput(form.value) > 0 && form.date,
@@ -52,8 +67,8 @@ export default function TransactionForm({
     }
 
     const payload = {
-      id: generateId(),
-      type: mode,
+      id: initial?.id ?? generateId(),
+      type: effectiveMode,
       description: form.description.trim(),
       value: parsedValue,
       category: form.category,
@@ -63,6 +78,7 @@ export default function TransactionForm({
 
     onSubmit?.(payload);
     setError("");
+    if (isEditing) return;
     setForm((prev) => ({ ...prev, description: "", value: "" }));
   }
 
@@ -136,8 +152,13 @@ export default function TransactionForm({
       />
 
       <footer className="transaction-form__footer">
+        {isEditing ? (
+          <button className="day5__button day5__button--ghost" type="button" onClick={onCancelEdit}>
+            Cancelar edicao
+          </button>
+        ) : null}
         <button className="day5__button" type="submit" disabled={!canSubmit}>
-          {copy.button}
+          {isEditing ? "Atualizar transacao" : copy.button}
         </button>
       </footer>
     </form>

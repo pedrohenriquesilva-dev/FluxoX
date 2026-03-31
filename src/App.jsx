@@ -1,5 +1,6 @@
 import { useState } from "react";
 import TransactionForm from "./components/transactions/TransactionForm.jsx";
+import TransactionList from "./components/transactions/TransactionList.jsx";
 import Layout from "./components/ui/Layout.jsx";
 import StatCard from "./components/ui/StatCard.jsx";
 import { TRANSACTION_TYPES } from "./utils/constants.js";
@@ -9,6 +10,7 @@ function App() {
   const [page, setPage] = useState("dashboard");
   const [formMode, setFormMode] = useState(TRANSACTION_TYPES.EXPENSE);
   const [transactions, setTransactions] = useState([]);
+  const [editingTransaction, setEditingTransaction] = useState(null);
 
   const totalExpenses = transactions
     .filter((item) => item.type === TRANSACTION_TYPES.EXPENSE)
@@ -18,11 +20,25 @@ function App() {
     .filter((item) => item.type === TRANSACTION_TYPES.INCOME)
     .reduce((acc, item) => acc + item.value, 0);
 
+  function saveTransaction(transaction) {
+    setTransactions((prev) => {
+      const exists = prev.some((item) => item.id === transaction.id);
+      if (exists) return prev.map((item) => (item.id === transaction.id ? transaction : item));
+      return [transaction, ...prev];
+    });
+    setEditingTransaction(null);
+  }
+
+  function deleteTransaction(id) {
+    setTransactions((prev) => prev.filter((item) => item.id !== id));
+    setEditingTransaction((prev) => (prev?.id === id ? null : prev));
+  }
+
   return (
     <Layout currentPage={page} onNavigate={setPage}>
       <section className="day5">
         <header className="day5__header">
-          <h1 className="day5__title">Dia 6 - TransactionForm</h1>
+          <h1 className="day5__title">Dia 7 - CRUD completo</h1>
           <button
             className="day5__button"
             type="button"
@@ -40,7 +56,9 @@ function App() {
 
         <TransactionForm
           mode={formMode}
-          onSubmit={(transaction) => setTransactions((prev) => [transaction, ...prev])}
+          initial={editingTransaction}
+          onCancelEdit={() => setEditingTransaction(null)}
+          onSubmit={saveTransaction}
         />
 
         <div className="day5__grid">
@@ -57,28 +75,21 @@ function App() {
             icon="expenses"
           />
           <StatCard
-            title="Lancamentos hoje"
+            title="Lancamentos"
             value={String(transactions.length)}
             trend={transactions.length ? 14.1 : 0}
             icon="conference"
           />
         </div>
 
-        <div className="day6__list">
-          <h3 className="day6__list-title">Ultimos lancamentos</h3>
-          {transactions.length === 0 ? (
-            <p className="text-muted">Nenhum lancamento salvo ainda.</p>
-          ) : (
-            <ul className="day6__items">
-              {transactions.slice(0, 5).map((item) => (
-                <li key={item.id} className="day6__item">
-                  <span>{item.description}</span>
-                  <strong>{fmt(item.value)}</strong>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
+        <TransactionList
+          items={transactions}
+          onEdit={(transaction) => {
+            setEditingTransaction(transaction);
+            setFormMode(transaction.type);
+          }}
+          onDelete={deleteTransaction}
+        />
       </section>
     </Layout>
   );
