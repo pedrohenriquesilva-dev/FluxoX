@@ -1,0 +1,28 @@
+.incomes-page {
+  display: grid;
+  gap: 1rem;
+}
+
+.incomes-page__header {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.incomes-page__title {
+  font-size: clamp(1.35rem, 2.4vw, 1.9rem);
+}
+
+.incomes-page__subtitle {
+  font-size: 0.95rem;
+}
+
+.incomes-page__stats {
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+}
+
+.incomes-page__submit {
+  background: var(--success);
+  border-color: color-mix(in srgb, var(--success) 60%, var(--border));
+}

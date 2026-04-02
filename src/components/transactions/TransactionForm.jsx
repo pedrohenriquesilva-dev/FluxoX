@@ -22,16 +22,21 @@ function toInputDate(date = new Date()) {
 export default function TransactionForm({
   mode = TRANSACTION_TYPES.EXPENSE,
   initial = null,
+  categoryOptions = CATEGORIES,
+  methodOptions = PAYMENT_METHODS,
+  submitButtonClassName = "",
   onSubmit,
   onCancelEdit
 }) {
+  const categories = categoryOptions?.length ? categoryOptions : CATEGORIES;
+  const methods = methodOptions?.length ? methodOptions : PAYMENT_METHODS;
   const effectiveMode = initial?.type ?? mode;
   const copy = FORM_TEXT[effectiveMode] ?? FORM_TEXT[TRANSACTION_TYPES.EXPENSE];
   const [form, setForm] = useState({
     description: "",
     value: "",
-    category: CATEGORIES[0],
-    method: PAYMENT_METHODS[0],
+    category: categories[0],
+    method: methods[0],
     date: toInputDate()
   });
   const [error, setError] = useState("");
@@ -42,11 +47,11 @@ export default function TransactionForm({
     setForm({
       description: initial.description ?? "",
       value: String(initial.value ?? ""),
-      category: initial.category ?? CATEGORIES[0],
-      method: initial.method ?? PAYMENT_METHODS[0],
+      category: initial.category ?? categories[0],
+      method: initial.method ?? methods[0],
       date: initial.date ?? toInputDate()
     });
-  }, [initial]);
+  }, [initial, categories, methods]);
 
   const canSubmit = useMemo(
     () => form.description.trim() && normalizeMoneyInput(form.value) > 0 && form.date,
@@ -117,7 +122,7 @@ export default function TransactionForm({
             value={form.category}
             onChange={(event) => updateField("category", event.target.value)}
           >
-            {CATEGORIES.map((item) => (
+            {categories.map((item) => (
               <option key={item} value={item}>
                 {item}
               </option>
@@ -133,7 +138,7 @@ export default function TransactionForm({
             value={form.method}
             onChange={(event) => updateField("method", event.target.value)}
           >
-            {PAYMENT_METHODS.map((item) => (
+            {methods.map((item) => (
               <option key={item} value={item}>
                 {item}
               </option>
@@ -157,7 +162,11 @@ export default function TransactionForm({
             Cancelar edicao
           </button>
         ) : null}
-        <button className="day5__button" type="submit" disabled={!canSubmit}>
+        <button
+          className={`day5__button ${submitButtonClassName}`.trim()}
+          type="submit"
+          disabled={!canSubmit}
+        >
           {isEditing ? "Atualizar transacao" : copy.button}
         </button>
       </footer>
