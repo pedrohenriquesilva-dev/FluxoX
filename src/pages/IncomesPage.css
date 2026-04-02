@@ -22,6 +22,50 @@
   grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
 }
 
+.incomes-page__controls {
+  display: grid;
+  gap: 0.7rem;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  align-items: end;
+}
+
+.incomes-page__control {
+  display: grid;
+  gap: 0.3rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.incomes-page__control select {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--card);
+  color: var(--text);
+  font: inherit;
+  padding: 0.5rem 0.6rem;
+}
+
+.incomes-page__clear {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--card2);
+  color: var(--text);
+  font: inherit;
+  min-height: 38px;
+  padding: 0.45rem 0.75rem;
+  cursor: pointer;
+}
+
+.incomes-page__badge {
+  width: fit-content;
+  border: 1px solid color-mix(in srgb, var(--success) 45%, var(--border));
+  border-radius: 999px;
+  padding: 0.2rem 0.65rem;
+  font-size: 0.78rem;
+  color: var(--success);
+  background: color-mix(in srgb, var(--success) 16%, transparent);
+}
+
 .incomes-page__submit {
   background: var(--success);
   border-color: color-mix(in srgb, var(--success) 60%, var(--border));

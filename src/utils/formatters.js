@@ -45,6 +45,14 @@ export function filterByCategory(transactions = [], category = "") {
   );
 }
 
+export function filterByMethod(transactions = [], method = "") {
+  if (!method) return transactions;
+  const target = String(method).toLowerCase();
+  return transactions.filter(
+    (item) => String(item?.method ?? "").toLowerCase() === target
+  );
+}
+
 export function filterBySearch(transactions = [], query = "") {
   const term = String(query).trim().toLowerCase();
   if (!term) return transactions;
@@ -61,6 +69,13 @@ export function splitElectronicCash(transactions = []) {
       return acc;
     },
     { electronic: [], cash: [] }
+  );
+}
+
+export function sortByValue(transactions = [], order = "desc") {
+  const signal = order === "asc" ? 1 : -1;
+  return [...transactions].sort(
+    (a, b) => (Number(a?.value ?? 0) - Number(b?.value ?? 0)) * signal
   );
 }
 

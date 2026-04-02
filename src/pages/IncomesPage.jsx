@@ -3,7 +3,7 @@ import TransactionForm from "../components/transactions/TransactionForm.jsx";
 import TransactionList from "../components/transactions/TransactionList.jsx";
 import StatCard from "../components/ui/StatCard.jsx";
 import { TRANSACTION_TYPES } from "../utils/constants.js";
-import { fmt } from "../utils/formatters.js";
+import { filterByMethod, fmt, sortByValue } from "../utils/formatters.js";
 import "./IncomesPage.css";
 
 const INCOME_CATEGORIES = [
@@ -24,22 +24,31 @@ const RECEIPT_METHODS = [
   "boleto"
 ];
 
-export default function IncomesPage() {
-  const [transactions, setTransactions] = useState([]);
+export default function IncomesPage({
+  transactions = [],
+  onTransactionsChange
+}) {
   const [editingTransaction, setEditingTransaction] = useState(null);
+  const [methodFilter, setMethodFilter] = useState("");
+  const [valueOrder, setValueOrder] = useState("desc");
+
+  const visibleTransactions = useMemo(() => {
+    const filtered = filterByMethod(transactions, methodFilter);
+    return sortByValue(filtered, valueOrder);
+  }, [transactions, methodFilter, valueOrder]);
 
   const totalValue = useMemo(
-    () => transactions.reduce((acc, item) => acc + Number(item.value || 0), 0),
-    [transactions]
+    () => visibleTransactions.reduce((acc, item) => acc + Number(item.value || 0), 0),
+    [visibleTransactions]
   );
 
   const averageValue = useMemo(() => {
-    if (transactions.length === 0) return 0;
-    return totalValue / transactions.length;
-  }, [totalValue, transactions.length]);
+    if (visibleTransactions.length === 0) return 0;
+    return totalValue / visibleTransactions.length;
+  }, [totalValue, visibleTransactions.length]);
 
   function saveTransaction(transaction) {
-    setTransactions((prev) => {
+    onTransactionsChange?.((prev) => {
       const exists = prev.some((item) => item.id === transaction.id);
       if (exists) return prev.map((item) => (item.id === transaction.id ? transaction : item));
       return [transaction, ...prev];
@@ -48,7 +57,7 @@ export default function IncomesPage() {
   }
 
   function deleteTransaction(id) {
-    setTransactions((prev) => prev.filter((item) => item.id !== id));
+    onTransactionsChange?.((prev) => prev.filter((item) => item.id !== id));
     setEditingTransaction((prev) => (prev?.id === id ? null : prev));
   }
 
@@ -59,6 +68,49 @@ export default function IncomesPage() {
         <p className="incomes-page__subtitle text-muted">
           Registre entradas, acompanhe fontes de renda e mantenha o fluxo positivo.
         </p>
+        <div className="incomes-page__controls">
+          <label className="incomes-page__control" htmlFor="incomes-method-filter">
+            <span>Forma de recebimento</span>
+            <select
+              id="incomes-method-filter"
+              value={methodFilter}
+              onChange={(event) => setMethodFilter(event.target.value)}
+            >
+              <option value="">Todas</option>
+              {RECEIPT_METHODS.map((method) => (
+                <option key={method} value={method}>
+                  {method}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <label className="incomes-page__control" htmlFor="incomes-sort-value">
+            <span>Ordenar por valor</span>
+            <select
+              id="incomes-sort-value"
+              value={valueOrder}
+              onChange={(event) => setValueOrder(event.target.value)}
+            >
+              <option value="desc">Maior para menor</option>
+              <option value="asc">Menor para maior</option>
+            </select>
+          </label>
+
+          <button
+            className="incomes-page__clear"
+            type="button"
+            onClick={() => {
+              setMethodFilter("");
+              setValueOrder("desc");
+            }}
+          >
+            Limpar
+          </button>
+        </div>
+        {methodFilter ? (
+          <p className="incomes-page__badge">Filtro ativo: {methodFilter}</p>
+        ) : null}
       </header>
 
       <TransactionForm
@@ -72,13 +124,13 @@ export default function IncomesPage() {
       />
 
       <div className="incomes-page__stats">
-        <StatCard title="Total recebido" value={fmt(totalValue)} trend={transactions.length ? 6.3 : 0} icon="incomes" />
-        <StatCard title="Quantidade" value={String(transactions.length)} trend={transactions.length ? 4.7 : 0} icon="conference" />
-        <StatCard title="Ticket medio" value={fmt(averageValue)} trend={transactions.length ? 2.4 : 0} icon="annual" />
+        <StatCard title="Total recebido" value={fmt(totalValue)} trend={visibleTransactions.length ? 6.3 : 0} icon="incomes" />
+        <StatCard title="Quantidade" value={String(visibleTransactions.length)} trend={visibleTransactions.length ? 4.7 : 0} icon="conference" />
+        <StatCard title="Ticket medio" value={fmt(averageValue)} trend={visibleTransactions.length ? 2.4 : 0} icon="annual" />
       </div>
 
       <TransactionList
-        items={transactions}
+        items={visibleTransactions}
         onEdit={setEditingTransaction}
         onDelete={deleteTransaction}
       />
