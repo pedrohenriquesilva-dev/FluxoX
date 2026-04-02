@@ -1,6 +1,7 @@
 # FluxoX — Controle Financeiro Pessoal
+<img width="1362" height="707" alt="image" src="https://github.com/user-attachments/assets/f4a9e8d6-a3c8-44ab-a11b-a5954985395b" />
 
-<img width="1355" height="690" alt="image" src="https://github.com/user-attachments/assets/321ab0c3-f751-4d9c-8455-ece11862acea" />
+<img width="1359" height="700" alt="image" src="https://github.com/user-attachments/assets/7b0d0bdf-6b2a-4897-80f9-c789d13aae4a" />
 
 # Sobre o Projeto
 O FluxoX nasceu da necessidade de transformar uma planilha de controle financeiro em um sistema moderno, inteligente e prático. Em vez de fórmulas manuais e abas no Excel, o objetivo é ter uma aplicação web completa que:
