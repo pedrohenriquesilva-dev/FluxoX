@@ -1,0 +1,35 @@
+.accumulated-table {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  padding: 1rem;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.accumulated-table__title {
+  font-size: 1rem;
+}
+
+.accumulated-table__wrapper {
+  overflow-x: auto;
+}
+
+.accumulated-table table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 520px;
+}
+
+.accumulated-table th,
+.accumulated-table td {
+  text-align: left;
+  padding: 0.48rem 0.4rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 75%, transparent);
+  font-size: 0.86rem;
+}
+
+.accumulated-table th {
+  color: var(--muted);
+  font-weight: 600;
+}
