@@ -26,8 +26,8 @@
 }
 
 *::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 9px;
+  height: 9px;
 }
 
 *::-webkit-scrollbar-track {
@@ -35,7 +35,7 @@
 }
 
 *::-webkit-scrollbar-thumb {
-  background: var(--card2);
+  background: color-mix(in srgb, var(--muted) 28%, var(--card2));
   border-radius: 999px;
   border: 2px solid var(--card);
 }
@@ -43,13 +43,19 @@
 html,
 body,
 #root {
-  min-height: 100%;
+  min-height: 100vh;
 }
 
 body {
   font-family: var(--font);
   color: var(--text);
-  background: var(--bg);
+  background:
+    radial-gradient(1100px 550px at 100% -20%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 55%),
+    radial-gradient(900px 460px at 0% 120%, color-mix(in srgb, var(--success) 10%, transparent), transparent 52%),
+    var(--bg);
+  line-height: 1.35;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 .text-muted {
@@ -75,9 +81,10 @@ body {
 .font-mono {
   font-family: var(--mono);
 }
+
 .day5 {
   display: grid;
-  gap: 1.2rem;
+  gap: 1rem;
 }
 
 .day5__header {
@@ -88,28 +95,55 @@ body {
 }
 
 .day5__title {
-  font-size: clamp(1.25rem, 2.4vw, 1.8rem);
+  font-size: clamp(1.3rem, 2.2vw, 1.95rem);
+  letter-spacing: -0.02em;
 }
 
 .day5__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 0.9rem;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 0.75rem;
 }
 
 .day5__button {
   border: 1px solid var(--border);
-  background: var(--accent);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 88%, #fff), var(--accent));
   color: var(--text);
   border-radius: var(--radius-sm);
-  padding: 0.55rem 0.9rem;
+  padding: 0.52rem 0.88rem;
   font: inherit;
+  font-weight: 600;
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--accent) 28%, transparent);
   cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+}
+
+.day5__button:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.04);
+  box-shadow: 0 8px 16px color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+.day5__button:active {
+  transform: translateY(0);
+}
+
+.day5__button:disabled {
+  opacity: 0.56;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  filter: none;
 }
 
 .day5__button--ghost {
-  background: var(--card2);
-  color: var(--text);
+  background: color-mix(in srgb, var(--card2) 80%, transparent);
+  box-shadow: none;
+}
+
+.day5__button--ghost:hover {
+  filter: brightness(1.05);
+  box-shadow: none;
 }
 
 .day6__list {
@@ -138,4 +172,26 @@ body {
   border-radius: var(--radius-sm);
   background: var(--card2);
   padding: 0.55rem 0.7rem;
+}
+
+@media (max-width: 900px) {
+  .day5__header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 640px) {
+  .day5 {
+    gap: 0.85rem;
+  }
+
+  .day5__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .day5__button {
+    width: 100%;
+    justify-content: center;
+  }
 }

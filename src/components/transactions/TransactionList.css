@@ -1,47 +1,56 @@
 .transaction-list {
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  background: var(--card);
-  padding: 1rem;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--card) 95%, #000), var(--card));
+  padding: 0.95rem;
   display: grid;
-  gap: 0.8rem;
+  gap: 0.75rem;
 }
 
 .transaction-list__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.8rem;
+  gap: 0.75rem;
 }
 
 .transaction-list__title {
-  font-size: 1.1rem;
+  font-size: 1.04rem;
 }
 
 .transaction-list__count {
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: 0.82rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.14rem 0.52rem;
 }
 
 .transaction-list__empty {
-  padding: 0.4rem 0;
+  padding: 0.45rem 0;
 }
 
 .transaction-list__items {
   list-style: none;
   display: grid;
-  gap: 0.55rem;
+  gap: 0.5rem;
 }
 
 .transaction-list__item {
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  background: var(--card2);
-  padding: 0.7rem;
+  background: color-mix(in srgb, var(--card2) 90%, transparent);
+  padding: 0.68rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.8rem;
+  gap: 0.72rem;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.transaction-list__item:hover {
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+  transform: translateY(-1px);
 }
 
 .transaction-list__description {
@@ -49,19 +58,19 @@
 }
 
 .transaction-list__meta {
-  font-size: 0.82rem;
-  margin-top: 0.15rem;
+  font-size: 0.8rem;
+  margin-top: 0.12rem;
 }
 
 .transaction-list__right {
   display: grid;
   justify-items: end;
-  gap: 0.35rem;
+  gap: 0.32rem;
 }
 
 .transaction-list__actions {
   display: flex;
-  gap: 0.35rem;
+  gap: 0.32rem;
 }
 
 .transaction-list__btn {
@@ -70,15 +79,42 @@
   background: var(--card);
   color: var(--text);
   font: inherit;
-  font-size: 0.78rem;
-  padding: 0.32rem 0.55rem;
+  font-size: 0.76rem;
+  padding: 0.3rem 0.52rem;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 0.3rem;
+  gap: 0.28rem;
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.transaction-list__btn:hover {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
 }
 
 .transaction-list__btn--danger {
   color: var(--danger);
   border-color: color-mix(in srgb, var(--danger) 45%, var(--border));
+}
+
+@media (max-width: 760px) {
+  .transaction-list__item {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .transaction-list__right {
+    width: 100%;
+    justify-items: start;
+  }
+
+  .transaction-list__actions {
+    width: 100%;
+  }
+
+  .transaction-list__btn {
+    flex: 1;
+    justify-content: center;
+  }
 }
