@@ -1,0 +1,78 @@
+.savings-page {
+  display: grid;
+  gap: 1rem;
+}
+
+.savings-page__header {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.savings-page__title {
+  font-size: clamp(1.35rem, 2.4vw, 1.9rem);
+}
+
+.savings-page__subtitle {
+  font-size: 0.95rem;
+}
+
+.savings-page__month {
+  display: grid;
+  gap: 0.25rem;
+  width: fit-content;
+}
+
+.savings-page__month span {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.savings-page__month select {
+  min-width: 140px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--card);
+  color: var(--text);
+  font: inherit;
+  padding: 0.45rem 0.55rem;
+}
+
+.savings-page__inputs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.7rem;
+}
+
+.savings-page__field {
+  display: grid;
+  gap: 0.28rem;
+}
+
+.savings-page__field span {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.savings-page__field input {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--card);
+  color: var(--text);
+  font: inherit;
+  padding: 0.48rem 0.58rem;
+}
+
+.savings-page__cards {
+  display: grid;
+  gap: 0.7rem;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+}
+
+.savings-page__card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--card);
+  padding: 0.72rem;
+  display: grid;
+  gap: 0.2rem;
+}
