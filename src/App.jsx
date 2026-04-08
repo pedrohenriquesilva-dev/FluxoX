@@ -2,6 +2,7 @@ import Layout from "./components/ui/Layout.jsx";
 import useFinance from "./hooks/useFinance.js";
 import useLocalStorage from "./hooks/useLocalStorage.js";
 import AnnualPage from "./pages/AnnualPage.jsx";
+import ConferencePage from "./pages/ConferencePage.jsx";
 import DashboardPage from "./pages/DashboardPage.jsx";
 import ExpensesPage from "./pages/ExpensesPage.jsx";
 import IncomesPage from "./pages/IncomesPage.jsx";
@@ -54,11 +55,19 @@ function App() {
         />
       ) : null}
 
+      {page === "conference" ? (
+        <ConferencePage
+          finance={finance}
+          savingsByMonth={savingsByMonth}
+        />
+      ) : null}
+
       {page !== "dashboard" &&
       page !== "annual" &&
       page !== "expenses" &&
       page !== "incomes" &&
-      page !== "savings" ? (
+      page !== "savings" &&
+      page !== "conference" ? (
         <Placeholder page={page} />
       ) : null}
     </Layout>

@@ -1,0 +1,78 @@
+.conference-page {
+  display: grid;
+  gap: 1rem;
+}
+
+.conference-page__header {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.conference-page__title {
+  font-size: clamp(1.35rem, 2.4vw, 1.9rem);
+}
+
+.conference-page__subtitle {
+  font-size: 0.95rem;
+}
+
+.conference-page__stats {
+  display: grid;
+  gap: 0.7rem;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+}
+
+.conference-page__stat {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--card);
+  padding: 0.72rem;
+  display: grid;
+  gap: 0.2rem;
+}
+
+.conference-page__table-wrap {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  padding: 0.55rem;
+  overflow-x: auto;
+}
+
+.conference-page__table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 780px;
+}
+
+.conference-page__table th,
+.conference-page__table td {
+  text-align: left;
+  padding: 0.48rem 0.52rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 75%, transparent);
+  font-size: 0.84rem;
+}
+
+.conference-page__table th {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.conference-page__badge {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.12rem 0.5rem;
+  font-size: 0.74rem;
+}
+
+.conference-page__badge.is-ok {
+  color: var(--success);
+  border-color: color-mix(in srgb, var(--success) 45%, var(--border));
+  background: color-mix(in srgb, var(--success) 14%, transparent);
+}
+
+.conference-page__badge.is-warn {
+  color: var(--warning);
+  border-color: color-mix(in srgb, var(--warning) 45%, var(--border));
+  background: color-mix(in srgb, var(--warning) 14%, transparent);
+}
