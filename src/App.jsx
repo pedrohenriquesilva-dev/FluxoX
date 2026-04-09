@@ -6,6 +6,7 @@ import ConferencePage from "./pages/ConferencePage.jsx";
 import DashboardPage from "./pages/DashboardPage.jsx";
 import ExpensesPage from "./pages/ExpensesPage.jsx";
 import IncomesPage from "./pages/IncomesPage.jsx";
+import SettingsPage from "./pages/SettingsPage.jsx";
 import SavingsPage from "./pages/SavingsPage.jsx";
 import Placeholder from "./pages/Placeholder.jsx";
 
@@ -20,7 +21,12 @@ function App() {
     []
   );
   const [savingsByMonth, setSavingsByMonth] = useLocalStorage("fluxox:savings:by-month", {});
-  const [monthlyGoal] = useLocalStorage("fluxox:goal:monthly", 1000);
+  const [settings, setSettings] = useLocalStorage("fluxox:settings", {
+    expenseCategories: [],
+    paymentMethods: [],
+    savingLocations: []
+  });
+  const [monthlyGoal, setMonthlyGoal] = useLocalStorage("fluxox:goal:monthly", 1000);
 
   const finance = useFinance({
     expenses: expenseTransactions,
@@ -62,12 +68,22 @@ function App() {
         />
       ) : null}
 
+      {page === "settings" ? (
+        <SettingsPage
+          settings={settings}
+          onSettingsChange={setSettings}
+          monthlyGoal={monthlyGoal}
+          onMonthlyGoalChange={setMonthlyGoal}
+        />
+      ) : null}
+
       {page !== "dashboard" &&
       page !== "annual" &&
       page !== "expenses" &&
       page !== "incomes" &&
       page !== "savings" &&
-      page !== "conference" ? (
+      page !== "conference" &&
+      page !== "settings" ? (
         <Placeholder page={page} />
       ) : null}
     </Layout>

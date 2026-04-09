@@ -1,0 +1,74 @@
+.settings-page {
+  display: grid;
+  gap: 1rem;
+}
+
+.settings-page__header {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.settings-page__title {
+  font-size: clamp(1.35rem, 2.4vw, 1.9rem);
+}
+
+.settings-page__subtitle {
+  font-size: 0.95rem;
+}
+
+.settings-page__group {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--card);
+  padding: 0.8rem;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.settings-page__group h3 {
+  font-size: 0.98rem;
+}
+
+.settings-page__inline {
+  display: flex;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+
+.settings-page__inline input {
+  flex: 1;
+  min-width: 200px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--card2);
+  color: var(--text);
+  font: inherit;
+  padding: 0.48rem 0.58rem;
+}
+
+.settings-page__chips {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.settings-page__chips li {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--card2);
+  color: var(--text);
+  font-size: 0.82rem;
+  padding: 0.25rem 0.52rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.settings-page__chips button {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font: inherit;
+}
