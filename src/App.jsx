@@ -9,24 +9,25 @@ import IncomesPage from "./pages/IncomesPage.jsx";
 import SettingsPage from "./pages/SettingsPage.jsx";
 import SavingsPage from "./pages/SavingsPage.jsx";
 import Placeholder from "./pages/Placeholder.jsx";
+import { STORAGE_KEYS } from "./utils/storage.js";
 
 function App() {
-  const [page, setPage] = useLocalStorage("fluxox:active-page", "dashboard");
+  const [page, setPage] = useLocalStorage(STORAGE_KEYS.ACTIVE_PAGE, "dashboard");
   const [expenseTransactions, setExpenseTransactions] = useLocalStorage(
-    "fluxox:transactions:expenses",
+    STORAGE_KEYS.EXPENSE_TRANSACTIONS,
     []
   );
   const [incomeTransactions, setIncomeTransactions] = useLocalStorage(
-    "fluxox:transactions:incomes",
+    STORAGE_KEYS.INCOME_TRANSACTIONS,
     []
   );
-  const [savingsByMonth, setSavingsByMonth] = useLocalStorage("fluxox:savings:by-month", {});
-  const [settings, setSettings] = useLocalStorage("fluxox:settings", {
+  const [savingsByMonth, setSavingsByMonth] = useLocalStorage(STORAGE_KEYS.SAVINGS_BY_MONTH, {});
+  const [settings, setSettings] = useLocalStorage(STORAGE_KEYS.SETTINGS, {
     expenseCategories: [],
     paymentMethods: [],
     savingLocations: []
   });
-  const [monthlyGoal, setMonthlyGoal] = useLocalStorage("fluxox:goal:monthly", 1000);
+  const [monthlyGoal, setMonthlyGoal] = useLocalStorage(STORAGE_KEYS.MONTHLY_GOAL, 1000);
 
   const finance = useFinance({
     expenses: expenseTransactions,
