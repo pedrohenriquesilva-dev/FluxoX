@@ -1,4 +1,6 @@
 import Icon from "../ui/Icon.jsx";
+import PropTypes from "prop-types";
+import { transactionShape } from "../../utils/propTypes.js";
 import { fmt, formatDate } from "../../utils/formatters.js";
 import "./TransactionList.css";
 
@@ -57,3 +59,9 @@ export default function TransactionList({ items = [], onEdit, onDelete }) {
     </section>
   );
 }
+
+TransactionList.propTypes = {
+  items: PropTypes.arrayOf(transactionShape),
+  onEdit: PropTypes.func,
+  onDelete: PropTypes.func
+};

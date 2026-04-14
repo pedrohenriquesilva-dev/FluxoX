@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
+import PropTypes from "prop-types";
 import Field from "../ui/Field.jsx";
 import { CATEGORIES, PAYMENT_METHODS, TRANSACTION_TYPES } from "../../utils/constants.js";
+import { transactionShape } from "../../utils/propTypes.js";
 import { generateId, normalizeMoneyInput } from "../../utils/formatters.js";
 import "./TransactionForm.css";
 
@@ -173,3 +175,13 @@ export default function TransactionForm({
     </form>
   );
 }
+
+TransactionForm.propTypes = {
+  mode: PropTypes.string,
+  initial: transactionShape,
+  categoryOptions: PropTypes.arrayOf(PropTypes.string),
+  methodOptions: PropTypes.arrayOf(PropTypes.string),
+  submitButtonClassName: PropTypes.string,
+  onSubmit: PropTypes.func,
+  onCancelEdit: PropTypes.func
+};

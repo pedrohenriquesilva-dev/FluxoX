@@ -1,4 +1,5 @@
 import Icon from "./Icon.jsx";
+import PropTypes from "prop-types";
 import "./StatCard.css";
 
 export default function StatCard({ title, value, trend = 0, icon = "dashboard" }) {
@@ -19,3 +20,10 @@ export default function StatCard({ title, value, trend = 0, icon = "dashboard" }
     </article>
   );
 }
+
+StatCard.propTypes = {
+  title: PropTypes.string,
+  value: PropTypes.string,
+  trend: PropTypes.number,
+  icon: PropTypes.string
+};

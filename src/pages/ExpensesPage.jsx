@@ -1,7 +1,10 @@
 import { useMemo, useState } from "react";
+import PropTypes from "prop-types";
 import TransactionForm from "../components/transactions/TransactionForm.jsx";
 import TransactionList from "../components/transactions/TransactionList.jsx";
+import PageHeader from "../components/ui/PageHeader.jsx";
 import StatCard from "../components/ui/StatCard.jsx";
+import { transactionShape } from "../utils/propTypes.js";
 import { PAYMENT_METHODS, TRANSACTION_TYPES } from "../utils/constants.js";
 import { filterByMethod, fmt, sortByValue } from "../utils/formatters.js";
 import "./ExpensesPage.css";
@@ -45,55 +48,53 @@ export default function ExpensesPage({
 
   return (
     <section className="expenses-page">
-      <header className="expenses-page__header">
-        <h1 className="expenses-page__title">Despesas</h1>
-        <p className="expenses-page__subtitle text-muted">
-          Cadastre, edite e exclua despesas em um fluxo unico de CRUD.
-        </p>
-        <div className="expenses-page__controls">
-          <label className="expenses-page__control" htmlFor="expenses-method-filter">
-            <span>Forma de pagamento</span>
-            <select
-              id="expenses-method-filter"
-              value={methodFilter}
-              onChange={(event) => setMethodFilter(event.target.value)}
-            >
-              <option value="">Todas</option>
-              {PAYMENT_METHODS.map((method) => (
-                <option key={method} value={method}>
-                  {method}
-                </option>
-              ))}
-            </select>
-          </label>
-
-          <label className="expenses-page__control" htmlFor="expenses-sort-value">
-            <span>Ordenar por valor</span>
-            <select
-              id="expenses-sort-value"
-              value={valueOrder}
-              onChange={(event) => setValueOrder(event.target.value)}
-            >
-              <option value="desc">Maior para menor</option>
-              <option value="asc">Menor para maior</option>
-            </select>
-          </label>
-
-          <button
-            className="expenses-page__clear"
-            type="button"
-            onClick={() => {
-              setMethodFilter("");
-              setValueOrder("desc");
-            }}
+      <PageHeader
+        title="Despesas"
+        subtitle="Cadastre, edite e exclua despesas em um fluxo unico de CRUD."
+      />
+      <div className="expenses-page__controls">
+        <label className="expenses-page__control" htmlFor="expenses-method-filter">
+          <span>Forma de pagamento</span>
+          <select
+            id="expenses-method-filter"
+            value={methodFilter}
+            onChange={(event) => setMethodFilter(event.target.value)}
           >
-            Limpar
-          </button>
-        </div>
-        {methodFilter ? (
-          <p className="expenses-page__badge">Filtro ativo: {methodFilter}</p>
-        ) : null}
-      </header>
+            <option value="">Todas</option>
+            {PAYMENT_METHODS.map((method) => (
+              <option key={method} value={method}>
+                {method}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <label className="expenses-page__control" htmlFor="expenses-sort-value">
+          <span>Ordenar por valor</span>
+          <select
+            id="expenses-sort-value"
+            value={valueOrder}
+            onChange={(event) => setValueOrder(event.target.value)}
+          >
+            <option value="desc">Maior para menor</option>
+            <option value="asc">Menor para maior</option>
+          </select>
+        </label>
+
+        <button
+          className="expenses-page__clear"
+          type="button"
+          onClick={() => {
+            setMethodFilter("");
+            setValueOrder("desc");
+          }}
+        >
+          Limpar
+        </button>
+      </div>
+      {methodFilter ? (
+        <p className="expenses-page__badge">Filtro ativo: {methodFilter}</p>
+      ) : null}
 
       <TransactionForm
         mode={TRANSACTION_TYPES.EXPENSE}
@@ -116,3 +117,8 @@ export default function ExpensesPage({
     </section>
   );
 }
+
+ExpensesPage.propTypes = {
+  transactions: PropTypes.arrayOf(transactionShape),
+  onTransactionsChange: PropTypes.func
+};

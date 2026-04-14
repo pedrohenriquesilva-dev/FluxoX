@@ -1,3 +1,6 @@
+import PropTypes from "prop-types";
+import PageHeader from "../components/ui/PageHeader.jsx";
+import { financeShape } from "../utils/propTypes.js";
 import { fmt } from "../utils/formatters.js";
 import "./ConferencePage.css";
 
@@ -29,12 +32,10 @@ export default function ConferencePage({ finance, savingsByMonth = {} }) {
 
   return (
     <section className="conference-page">
-      <header className="conference-page__header">
-        <h1 className="conference-page__title">Conferencia</h1>
-        <p className="conference-page__subtitle text-muted">
-          Comparacao mes a mes entre acumulado calculado e guardado real.
-        </p>
-      </header>
+      <PageHeader
+        title="Conferencia"
+        subtitle="Comparacao mes a mes entre acumulado calculado e guardado real."
+      />
 
       <div className="conference-page__stats">
         <article className="conference-page__stat">
@@ -89,3 +90,8 @@ export default function ConferencePage({ finance, savingsByMonth = {} }) {
     </section>
   );
 }
+
+ConferencePage.propTypes = {
+  finance: financeShape,
+  savingsByMonth: PropTypes.object
+};

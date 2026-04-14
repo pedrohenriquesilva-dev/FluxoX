@@ -1,5 +1,8 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
+import PageHeader from "../components/ui/PageHeader.jsx";
 import { CATEGORIES, PAYMENT_METHODS } from "../utils/constants.js";
+import { settingsShape } from "../utils/propTypes.js";
 import "./SettingsPage.css";
 
 const DEFAULT_SETTINGS = {
@@ -41,6 +44,15 @@ function ListEditor({ title, items = [], inputValue, onInputChange, onAdd, onRem
   );
 }
 
+ListEditor.propTypes = {
+  title: PropTypes.string,
+  items: PropTypes.arrayOf(PropTypes.string),
+  inputValue: PropTypes.string,
+  onInputChange: PropTypes.func,
+  onAdd: PropTypes.func,
+  onRemove: PropTypes.func
+};
+
 export default function SettingsPage({
   settings = DEFAULT_SETTINGS,
   onSettingsChange,
@@ -78,12 +90,10 @@ export default function SettingsPage({
 
   return (
     <section className="settings-page">
-      <header className="settings-page__header">
-        <h1 className="settings-page__title">Configuracoes</h1>
-        <p className="settings-page__subtitle text-muted">
-          Ajuste categorias, formas de pagamento, locais de reserva e meta mensal.
-        </p>
-      </header>
+      <PageHeader
+        title="Configuracoes"
+        subtitle="Ajuste categorias, formas de pagamento, locais de reserva e meta mensal."
+      />
 
       <section className="settings-page__group">
         <h3>Meta mensal</h3>
@@ -139,3 +149,10 @@ export default function SettingsPage({
     </section>
   );
 }
+
+SettingsPage.propTypes = {
+  settings: settingsShape,
+  onSettingsChange: PropTypes.func,
+  monthlyGoal: PropTypes.number,
+  onMonthlyGoalChange: PropTypes.func
+};

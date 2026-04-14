@@ -1,4 +1,7 @@
 import { useMemo, useState } from "react";
+import PropTypes from "prop-types";
+import PageHeader from "../components/ui/PageHeader.jsx";
+import { financeShape } from "../utils/propTypes.js";
 import { fmt } from "../utils/formatters.js";
 import "./SavingsPage.css";
 
@@ -46,12 +49,10 @@ export default function SavingsPage({
 
   return (
     <section className="savings-page">
-      <header className="savings-page__header">
-        <h1 className="savings-page__title">Savings</h1>
-        <p className="savings-page__subtitle text-muted">
-          Informe quanto voce possui em cada local e compare com o acumulado calculado.
-        </p>
-      </header>
+      <PageHeader
+        title="Savings"
+        subtitle="Informe quanto voce possui em cada local e compare com o acumulado calculado."
+      />
 
       <label className="savings-page__month" htmlFor="savings-month">
         <span>Mes de referencia</span>
@@ -101,3 +102,9 @@ export default function SavingsPage({
     </section>
   );
 }
+
+SavingsPage.propTypes = {
+  finance: financeShape,
+  savingsByMonth: PropTypes.object,
+  onSavingsByMonthChange: PropTypes.func
+};

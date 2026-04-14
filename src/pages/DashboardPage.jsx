@@ -1,7 +1,10 @@
 import AccumulatedTable from "../components/ui/AccumulatedTable.jsx";
 import BarChart from "../components/ui/BarChart.jsx";
+import PageHeader from "../components/ui/PageHeader.jsx";
 import PieChart from "../components/ui/PieChart.jsx";
 import StatCard from "../components/ui/StatCard.jsx";
+import PropTypes from "prop-types";
+import { financeShape } from "../utils/propTypes.js";
 import { fmt } from "../utils/formatters.js";
 import "./DashboardPage.css";
 
@@ -10,17 +13,15 @@ export default function DashboardPage({ finance }) {
 
   return (
     <section className="dashboard-page">
-      <header className="dashboard-page__header">
-        <div>
-          <h1 className="dashboard-page__title">Dashboard</h1>
-          <p className="dashboard-page__subtitle text-muted">
-            Visao consolidada das financas com foco em saldo, meta e acumulado anual.
+      <PageHeader
+        title="Dashboard"
+        subtitle="Visao consolidada das financas com foco em saldo, meta e acumulado anual."
+        rightSlot={(
+          <p className={`dashboard-page__goal ${finance.goal.reached ? "text-success" : "text-warning"}`}>
+            Meta do mes: {fmt(finance.monthly.savings)} / {fmt(finance.goal.value)}
           </p>
-        </div>
-        <p className={`dashboard-page__goal ${finance.goal.reached ? "text-success" : "text-warning"}`}>
-          Meta do mes: {fmt(finance.monthly.savings)} / {fmt(finance.goal.value)}
-        </p>
-      </header>
+        )}
+      />
 
       <div className="dashboard-page__stats">
         <StatCard title="Receitas (total)" value={fmt(finance.totals.incomes)} trend={6.1} icon="incomes" />
@@ -47,3 +48,7 @@ export default function DashboardPage({ finance }) {
     </section>
   );
 }
+
+DashboardPage.propTypes = {
+  finance: financeShape
+};

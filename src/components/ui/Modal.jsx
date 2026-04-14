@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import PropTypes from "prop-types";
 import Icon from "./Icon.jsx";
 import "./Modal.css";
 
@@ -32,3 +33,11 @@ export default function Modal({ open, title, children, onClose, actions }) {
     </div>
   );
 }
+
+Modal.propTypes = {
+  open: PropTypes.bool,
+  title: PropTypes.string,
+  children: PropTypes.node,
+  onClose: PropTypes.func,
+  actions: PropTypes.node
+};

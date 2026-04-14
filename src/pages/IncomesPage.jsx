@@ -1,7 +1,10 @@
 import { useMemo, useState } from "react";
+import PropTypes from "prop-types";
 import TransactionForm from "../components/transactions/TransactionForm.jsx";
 import TransactionList from "../components/transactions/TransactionList.jsx";
+import PageHeader from "../components/ui/PageHeader.jsx";
 import StatCard from "../components/ui/StatCard.jsx";
+import { transactionShape } from "../utils/propTypes.js";
 import { TRANSACTION_TYPES } from "../utils/constants.js";
 import { filterByMethod, fmt, sortByValue } from "../utils/formatters.js";
 import "./IncomesPage.css";
@@ -63,55 +66,53 @@ export default function IncomesPage({
 
   return (
     <section className="incomes-page">
-      <header className="incomes-page__header">
-        <h1 className="incomes-page__title">Receitas</h1>
-        <p className="incomes-page__subtitle text-muted">
-          Registre entradas, acompanhe fontes de renda e mantenha o fluxo positivo.
-        </p>
-        <div className="incomes-page__controls">
-          <label className="incomes-page__control" htmlFor="incomes-method-filter">
-            <span>Forma de recebimento</span>
-            <select
-              id="incomes-method-filter"
-              value={methodFilter}
-              onChange={(event) => setMethodFilter(event.target.value)}
-            >
-              <option value="">Todas</option>
-              {RECEIPT_METHODS.map((method) => (
-                <option key={method} value={method}>
-                  {method}
-                </option>
-              ))}
-            </select>
-          </label>
-
-          <label className="incomes-page__control" htmlFor="incomes-sort-value">
-            <span>Ordenar por valor</span>
-            <select
-              id="incomes-sort-value"
-              value={valueOrder}
-              onChange={(event) => setValueOrder(event.target.value)}
-            >
-              <option value="desc">Maior para menor</option>
-              <option value="asc">Menor para maior</option>
-            </select>
-          </label>
-
-          <button
-            className="incomes-page__clear"
-            type="button"
-            onClick={() => {
-              setMethodFilter("");
-              setValueOrder("desc");
-            }}
+      <PageHeader
+        title="Receitas"
+        subtitle="Registre entradas, acompanhe fontes de renda e mantenha o fluxo positivo."
+      />
+      <div className="incomes-page__controls">
+        <label className="incomes-page__control" htmlFor="incomes-method-filter">
+          <span>Forma de recebimento</span>
+          <select
+            id="incomes-method-filter"
+            value={methodFilter}
+            onChange={(event) => setMethodFilter(event.target.value)}
           >
-            Limpar
-          </button>
-        </div>
-        {methodFilter ? (
-          <p className="incomes-page__badge">Filtro ativo: {methodFilter}</p>
-        ) : null}
-      </header>
+            <option value="">Todas</option>
+            {RECEIPT_METHODS.map((method) => (
+              <option key={method} value={method}>
+                {method}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <label className="incomes-page__control" htmlFor="incomes-sort-value">
+          <span>Ordenar por valor</span>
+          <select
+            id="incomes-sort-value"
+            value={valueOrder}
+            onChange={(event) => setValueOrder(event.target.value)}
+          >
+            <option value="desc">Maior para menor</option>
+            <option value="asc">Menor para maior</option>
+          </select>
+        </label>
+
+        <button
+          className="incomes-page__clear"
+          type="button"
+          onClick={() => {
+            setMethodFilter("");
+            setValueOrder("desc");
+          }}
+        >
+          Limpar
+        </button>
+      </div>
+      {methodFilter ? (
+        <p className="incomes-page__badge">Filtro ativo: {methodFilter}</p>
+      ) : null}
 
       <TransactionForm
         mode={TRANSACTION_TYPES.INCOME}
@@ -137,3 +138,8 @@ export default function IncomesPage({
     </section>
   );
 }
+
+IncomesPage.propTypes = {
+  transactions: PropTypes.arrayOf(transactionShape),
+  onTransactionsChange: PropTypes.func
+};
