@@ -4,6 +4,11 @@
   background: transparent;
 }
 
+.layout__sidebar-wrap {
+  width: var(--sidebar-w);
+  flex: 0 0 var(--sidebar-w);
+}
+
 .layout__main {
   flex: 1;
   max-width: 1140px;
@@ -18,7 +23,12 @@
     flex-direction: column;
   }
 
+  .layout__sidebar-wrap {
+    display: none;
+  }
+
   .layout__main {
-    padding: 1rem 1rem 1.5rem;
+    max-width: 100%;
+    padding: 1rem 1rem calc(5.2rem + env(safe-area-inset-bottom));
   }
 }

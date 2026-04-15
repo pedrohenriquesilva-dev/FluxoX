@@ -76,3 +76,45 @@
   display: grid;
   gap: 0.2rem;
 }
+
+/* OtherPages.responsive.css */
+@media (max-width: 768px) {
+  .savings-page {
+    gap: 0.85rem;
+  }
+
+  .savings-page__inputs {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.55rem;
+  }
+
+  .savings-page__cards {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.55rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .savings-page__month {
+    width: 100%;
+  }
+
+  .savings-page__month select {
+    width: 100%;
+  }
+
+  .savings-page__inputs,
+  .savings-page__cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 360px) {
+  .savings-page {
+    gap: 0.65rem;
+  }
+
+  .savings-page__subtitle {
+    font-size: 0.82rem;
+  }
+}

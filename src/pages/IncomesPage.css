@@ -70,3 +70,48 @@
   background: var(--success);
   border-color: color-mix(in srgb, var(--success) 60%, var(--border));
 }
+
+/* TransactionPages.responsive.css */
+@media (max-width: 768px) {
+  .incomes-page {
+    gap: 0.85rem;
+  }
+
+  .incomes-page__controls {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .incomes-page__stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .incomes-page__controls {
+    grid-template-columns: 1fr;
+  }
+
+  .incomes-page__stats {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .incomes-page__badge {
+    width: 100%;
+  }
+}
+
+@media (max-width: 360px) {
+  .incomes-page {
+    gap: 0.65rem;
+  }
+
+  .incomes-page__control {
+    font-size: 0.8rem;
+  }
+
+  .incomes-page__clear {
+    min-height: 34px;
+  }
+}

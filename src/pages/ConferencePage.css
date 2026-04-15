@@ -76,3 +76,41 @@
   border-color: color-mix(in srgb, var(--warning) 45%, var(--border));
   background: color-mix(in srgb, var(--warning) 14%, transparent);
 }
+
+/* OtherPages.responsive.css */
+@media (max-width: 768px) {
+  .conference-page {
+    gap: 0.85rem;
+  }
+
+  .conference-page__stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.55rem;
+  }
+
+  .conference-page__table-wrap {
+    padding: 0.45rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .conference-page__stats {
+    grid-template-columns: 1fr;
+  }
+
+  .conference-page__table th,
+  .conference-page__table td {
+    font-size: 0.78rem;
+    padding: 0.42rem 0.45rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .conference-page {
+    gap: 0.65rem;
+  }
+
+  .conference-page__subtitle {
+    font-size: 0.82rem;
+  }
+}

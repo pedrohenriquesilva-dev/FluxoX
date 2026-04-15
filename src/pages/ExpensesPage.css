@@ -65,3 +65,48 @@
   color: var(--danger);
   background: color-mix(in srgb, var(--danger) 16%, transparent);
 }
+
+/* TransactionPages.responsive.css */
+@media (max-width: 768px) {
+  .expenses-page {
+    gap: 0.85rem;
+  }
+
+  .expenses-page__controls {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .expenses-page__stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .expenses-page__controls {
+    grid-template-columns: 1fr;
+  }
+
+  .expenses-page__stats {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .expenses-page__badge {
+    width: 100%;
+  }
+}
+
+@media (max-width: 360px) {
+  .expenses-page {
+    gap: 0.65rem;
+  }
+
+  .expenses-page__control {
+    font-size: 0.8rem;
+  }
+
+  .expenses-page__clear {
+    min-height: 34px;
+  }
+}

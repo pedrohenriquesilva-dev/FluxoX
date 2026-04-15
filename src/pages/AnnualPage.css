@@ -57,3 +57,45 @@
   color: var(--muted);
   font-weight: 600;
 }
+
+/* AnnualPage.responsive.css */
+@media (max-width: 768px) {
+  .annual-page {
+    gap: 0.85rem;
+  }
+
+  .annual-page__stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.55rem;
+  }
+
+  .annual-page__table-wrap {
+    padding: 0.45rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .annual-page__stats {
+    grid-template-columns: 1fr;
+  }
+
+  .annual-page__table th,
+  .annual-page__table td {
+    font-size: 0.78rem;
+    padding: 0.42rem 0.45rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .annual-page {
+    gap: 0.65rem;
+  }
+
+  .annual-page__title {
+    font-size: 1.2rem;
+  }
+
+  .annual-page__subtitle {
+    font-size: 0.82rem;
+  }
+}
