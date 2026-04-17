@@ -1,13 +1,40 @@
+import {
+  BarChart as RechartsBarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 import { fmt } from "../../utils/formatters.js";
 import "./BarChart.css";
 
 const MONTHS = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
 
+const CustomTooltip = ({ active, payload }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="bar-chart__tooltip">
+        <p className="bar-chart__tooltip-month">{payload[0].payload.month}</p>
+        {payload.map((entry, idx) => (
+          <p key={idx} style={{ color: entry.color }} className="bar-chart__tooltip-value">
+            {entry.name}: <span>{fmt(entry.value)}</span>
+          </p>
+        ))}
+      </div>
+    );
+  }
+  return null;
+};
+
 export default function BarChart({ data = [] }) {
-  const maxAbs = Math.max(
-    1,
-    ...data.map((item) => Math.max(Math.abs(item?.income ?? 0), Math.abs(item?.expense ?? 0)))
-  );
+  const chartData = data.map((item) => ({
+    month: MONTHS[item.month] ?? "--",
+    income: Number(item?.income ?? 0),
+    expense: Number(item?.expense ?? 0),
+  }));
 
   return (
     <section className="bar-chart">
@@ -15,31 +42,43 @@ export default function BarChart({ data = [] }) {
         <h3 className="bar-chart__title">Entradas vs Saidas (Ano)</h3>
       </header>
 
-      <div className="bar-chart__rows">
-        {data.map((item) => {
-          const income = Number(item?.income ?? 0);
-          const expense = Number(item?.expense ?? 0);
-          const incomePct = (income / maxAbs) * 100;
-          const expensePct = (expense / maxAbs) * 100;
-
-          return (
-            <div className="bar-chart__row" key={item.month}>
-              <span className="bar-chart__month">{MONTHS[item.month] ?? "--"}</span>
-              <div className="bar-chart__bars">
-                <div
-                  className="bar-chart__bar bar-chart__bar--income"
-                  style={{ width: `${incomePct}%` }}
-                  title={`Receitas: ${fmt(income)}`}
-                />
-                <div
-                  className="bar-chart__bar bar-chart__bar--expense"
-                  style={{ width: `${expensePct}%` }}
-                  title={`Despesas: ${fmt(expense)}`}
-                />
-              </div>
-            </div>
-          );
-        })}
+      <div className="bar-chart__container">
+        <ResponsiveContainer width="100%" height={300}>
+          <RechartsBarChart
+            data={chartData}
+            margin={{ top: 20, right: 30, left: 0, bottom: 5 }}
+            className="bar-chart__recharts"
+          >
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+            <XAxis
+              dataKey="month"
+              stroke="var(--muted)"
+              style={{ fontSize: "0.75rem" }}
+            />
+            <YAxis
+              stroke="var(--muted)"
+              style={{ fontSize: "0.75rem" }}
+              tickFormatter={fmt}
+            />
+            <Tooltip content={<CustomTooltip />} />
+            <Legend
+              wrapperStyle={{ paddingTop: "1rem" }}
+              iconType="square"
+            />
+            <Bar
+              dataKey="income"
+              fill="var(--success)"
+              name="Receitas"
+              radius={[8, 8, 0, 0]}
+            />
+            <Bar
+              dataKey="expense"
+              fill="var(--danger)"
+              name="Despesas"
+              radius={[8, 8, 0, 0]}
+            />
+          </RechartsBarChart>
+        </ResponsiveContainer>
       </div>
     </section>
   );
