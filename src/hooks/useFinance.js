@@ -2,7 +2,33 @@ import { useMemo } from "react";
 import { TRANSACTION_TYPES } from "../utils/constants.js";
 import { getCurrentMonthIndex, isCash, sumValues } from "../utils/formatters.js";
 
-function normalizeList(list, forcedType) {
+/**
+ * @typedef {Object} FinanceTransaction
+ * @property {string} [id]
+ * @property {string} [type]
+ * @property {string} [description]
+ * @property {string} [category]
+ * @property {string} [method]
+ * @property {number|string} [value]
+ * @property {string|Date} [date]
+ */
+
+/**
+ * @typedef {Object} UseFinanceInput
+ * @property {FinanceTransaction[]} [expenses]
+ * @property {FinanceTransaction[]} [incomes]
+ * @property {number} [monthlyGoal]
+ */
+
+/**
+ * @typedef {Object} MonthlyAccumulationRow
+ * @property {number} month
+ * @property {number} income
+ * @property {number} expense
+ * @property {number} balance
+ */
+
+function normalizeTransactions(list, forcedType) {
   return list.map((item) => ({
     ...item,
     type: item?.type ?? forcedType,
@@ -10,15 +36,16 @@ function normalizeList(list, forcedType) {
   }));
 }
 
-function filterByMonth(list, monthIndex) {
-  return list.filter((item) => {
-    const date = new Date(item?.date);
-    if (Number.isNaN(date.getTime())) return false;
-    return date.getMonth() === monthIndex;
-  });
+function getMonthIndexFromDate(value) {
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? -1 : date.getMonth();
 }
 
-function splitByMethod(list) {
+function filterTransactionsByMonth(list, monthIndex) {
+  return list.filter((item) => getMonthIndexFromDate(item?.date) === monthIndex);
+}
+
+function splitTransactionsByMethod(list) {
   return list.reduce(
     (acc, item) => {
       if (isCash(item?.method)) acc.cash.push(item);
@@ -29,32 +56,34 @@ function splitByMethod(list) {
   );
 }
 
-export default function useFinance({
-  expenses = [],
-  incomes = [],
-  monthlyGoal = 0
-} = {}) {
+/**
+ * Central financial calculations used by dashboard and yearly pages.
+ *
+ * @param {UseFinanceInput} params
+ */
+export default function useFinance({ expenses = [], incomes = [], monthlyGoal = 0 } = {}) {
   return useMemo(() => {
-    const normalizedExpenses = normalizeList(expenses, TRANSACTION_TYPES.EXPENSE);
-    const normalizedIncomes = normalizeList(incomes, TRANSACTION_TYPES.INCOME);
+    const normalizedExpenses = normalizeTransactions(expenses, TRANSACTION_TYPES.EXPENSE);
+    const normalizedIncomes = normalizeTransactions(incomes, TRANSACTION_TYPES.INCOME);
     const monthIndex = getCurrentMonthIndex();
 
-    const expenseSplit = splitByMethod(normalizedExpenses);
-    const incomeSplit = splitByMethod(normalizedIncomes);
+    const expenseSplit = splitTransactionsByMethod(normalizedExpenses);
+    const incomeSplit = splitTransactionsByMethod(normalizedIncomes);
 
     const totalExpenses = sumValues(normalizedExpenses);
     const totalIncomes = sumValues(normalizedIncomes);
     const realSavings = totalIncomes - totalExpenses;
 
-    const monthExpenses = filterByMonth(normalizedExpenses, monthIndex);
-    const monthIncomes = filterByMonth(normalizedIncomes, monthIndex);
+    const monthExpenses = filterTransactionsByMonth(normalizedExpenses, monthIndex);
+    const monthIncomes = filterTransactionsByMonth(normalizedIncomes, monthIndex);
     const monthExpensesTotal = sumValues(monthExpenses);
     const monthIncomesTotal = sumValues(monthIncomes);
     const monthSavings = monthIncomesTotal - monthExpensesTotal;
 
+    /** @type {MonthlyAccumulationRow[]} */
     const monthlyAccumulation = Array.from({ length: 12 }, (_, index) => {
-      const income = sumValues(filterByMonth(normalizedIncomes, index));
-      const expense = sumValues(filterByMonth(normalizedExpenses, index));
+      const income = sumValues(filterTransactionsByMonth(normalizedIncomes, index));
+      const expense = sumValues(filterTransactionsByMonth(normalizedExpenses, index));
       return {
         month: index,
         income,
@@ -63,7 +92,7 @@ export default function useFinance({
       };
     });
 
-    const goal = Number(monthlyGoal || 0);
+    const goal = Number(monthlyGoal ?? 0);
     const goalProgress = goal > 0 ? monthSavings / goal : 0;
     const goalDelta = monthSavings - goal;
 

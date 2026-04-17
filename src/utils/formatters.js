@@ -1,5 +1,11 @@
 import { CURRENCY, DATE_FORMATS, LOCALE } from "./constants.js";
 
+/**
+ * Format value as local currency.
+ *
+ * @param {number|string} value
+ * @returns {string}
+ */
 export function fmt(value) {
   const amount = Number(value ?? 0);
   return new Intl.NumberFormat(LOCALE, {
@@ -8,6 +14,12 @@ export function fmt(value) {
   }).format(Number.isFinite(amount) ? amount : 0);
 }
 
+/**
+ * Detect whether a payment method is physical cash.
+ *
+ * @param {string} [method]
+ * @returns {boolean}
+ */
 export function isCash(method = "") {
   const normalized = String(method)
     .trim()
@@ -17,18 +29,41 @@ export function isCash(method = "") {
   return normalized.includes("dinheiro") || normalized.includes("especie");
 }
 
+/**
+ * Generate a unique transaction identifier.
+ *
+ * @returns {string}
+ */
 export function generateId() {
   return `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 }
 
+/**
+ * Get current month index (0-11).
+ *
+ * @returns {number}
+ */
 export function getCurrentMonthIndex() {
   return new Date().getMonth();
 }
 
+/**
+ * Sum `value` fields from a list of items.
+ *
+ * @param {Array<{value?: number|string}>} [list]
+ * @returns {number}
+ */
 export function sumValues(list = []) {
   return list.reduce((acc, item) => acc + Number(item?.value ?? 0), 0);
 }
 
+/**
+ * Filter transactions by month index from their `date` field.
+ *
+ * @param {Array<{date?: string|Date}>} [transactions]
+ * @param {number} [monthIndex]
+ * @returns {Array}
+ */
 export function filterByMonth(transactions = [], monthIndex = getCurrentMonthIndex()) {
   return transactions.filter((item) => {
     const date = new Date(item?.date);
@@ -37,6 +72,13 @@ export function filterByMonth(transactions = [], monthIndex = getCurrentMonthInd
   });
 }
 
+/**
+ * Filter transactions by exact category match (case-insensitive).
+ *
+ * @param {Array<{category?: string}>} [transactions]
+ * @param {string} [category]
+ * @returns {Array}
+ */
 export function filterByCategory(transactions = [], category = "") {
   if (!category) return transactions;
   const target = String(category).toLowerCase();
@@ -45,6 +87,13 @@ export function filterByCategory(transactions = [], category = "") {
   );
 }
 
+/**
+ * Filter transactions by exact payment method match (case-insensitive).
+ *
+ * @param {Array<{method?: string}>} [transactions]
+ * @param {string} [method]
+ * @returns {Array}
+ */
 export function filterByMethod(transactions = [], method = "") {
   if (!method) return transactions;
   const target = String(method).toLowerCase();
@@ -53,6 +102,13 @@ export function filterByMethod(transactions = [], method = "") {
   );
 }
 
+/**
+ * Filter transactions by description substring (case-insensitive).
+ *
+ * @param {Array<{description?: string}>} [transactions]
+ * @param {string} [query]
+ * @returns {Array}
+ */
 export function filterBySearch(transactions = [], query = "") {
   const term = String(query).trim().toLowerCase();
   if (!term) return transactions;
@@ -61,6 +117,12 @@ export function filterBySearch(transactions = [], query = "") {
   );
 }
 
+/**
+ * Split transactions into electronic and cash buckets.
+ *
+ * @param {Array<{method?: string}>} [transactions]
+ * @returns {{electronic: Array, cash: Array}}
+ */
 export function splitElectronicCash(transactions = []) {
   return transactions.reduce(
     (acc, item) => {
@@ -72,6 +134,13 @@ export function splitElectronicCash(transactions = []) {
   );
 }
 
+/**
+ * Sort transactions by numeric value.
+ *
+ * @param {Array<{value?: number|string}>} [transactions]
+ * @param {"asc"|"desc"} [order]
+ * @returns {Array}
+ */
 export function sortByValue(transactions = [], order = "desc") {
   const signal = order === "asc" ? 1 : -1;
   return [...transactions].sort(
@@ -79,6 +148,14 @@ export function sortByValue(transactions = [], order = "desc") {
   );
 }
 
+/**
+ * Format value as currency with custom locale/currency.
+ *
+ * @param {number|string} value
+ * @param {string} [currency]
+ * @param {string} [locale]
+ * @returns {string}
+ */
 export function formatCurrency(value, currency = CURRENCY, locale = LOCALE) {
   const amount = Number(value ?? 0);
   return new Intl.NumberFormat(locale, {
@@ -87,11 +164,25 @@ export function formatCurrency(value, currency = CURRENCY, locale = LOCALE) {
   }).format(Number.isFinite(amount) ? amount : 0);
 }
 
+/**
+ * Format generic number using locale grouping.
+ *
+ * @param {number|string} value
+ * @param {string} [locale]
+ * @returns {string}
+ */
 export function formatNumber(value, locale = LOCALE) {
   const amount = Number(value ?? 0);
   return new Intl.NumberFormat(locale).format(Number.isFinite(amount) ? amount : 0);
 }
 
+/**
+ * Format ratio as percentage.
+ *
+ * @param {number|string} value
+ * @param {string} [locale]
+ * @returns {string}
+ */
 export function formatPercent(value, locale = LOCALE) {
   const ratio = Number(value ?? 0);
   return new Intl.NumberFormat(locale, {
@@ -101,12 +192,26 @@ export function formatPercent(value, locale = LOCALE) {
   }).format(Number.isFinite(ratio) ? ratio : 0);
 }
 
+/**
+ * Format date input according to locale/date options.
+ *
+ * @param {string|Date} dateInput
+ * @param {Intl.DateTimeFormatOptions} [options]
+ * @param {string} [locale]
+ * @returns {string}
+ */
 export function formatDate(dateInput, options = DATE_FORMATS.MEDIUM, locale = LOCALE) {
   const date = dateInput instanceof Date ? dateInput : new Date(dateInput);
   if (Number.isNaN(date.getTime())) return "";
   return new Intl.DateTimeFormat(locale, options).format(date);
 }
 
+/**
+ * Parse money input strings to a numeric value.
+ *
+ * @param {number|string} input
+ * @returns {number}
+ */
 export function normalizeMoneyInput(input) {
   if (typeof input === "number") return Number.isFinite(input) ? input : 0;
   if (typeof input !== "string") return 0;
@@ -121,6 +226,12 @@ export function normalizeMoneyInput(input) {
   return Number.isFinite(amount) ? amount : 0;
 }
 
+/**
+ * Convert text to title case.
+ *
+ * @param {string} [value]
+ * @returns {string}
+ */
 export function toTitleCase(value = "") {
   return String(value)
     .trim()

@@ -2,11 +2,7 @@ export const APP_NAME = "FluxoX";
 export const LOCALE = "pt-BR";
 export const CURRENCY = "BRL";
 
-export const STORAGE_KEYS = {
-  TRANSACTIONS: "fluxox:transactions",
-  SETTINGS: "fluxox:settings",
-  ACTIVE_PAGE: "fluxox:active-page"
-};
+export const MONTH_NAMES = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
 
 export const TRANSACTION_TYPES = {
   EXPENSE: "expense",
@@ -49,7 +45,7 @@ export const PAGE_CONFIG = [
   { id: PAGE_IDS.EXPENSES, label: "Despesas", icon: "\u{1F4B8}" },
   { id: PAGE_IDS.INCOMES, label: "Receitas", icon: "\u{1F4B0}" },
   { id: PAGE_IDS.ANNUAL, label: "Anual", icon: "\u{1F4C5}" },
-  { id: PAGE_IDS.SAVINGS, label: "Poupanca", icon: "\u{1F4B5}" },
+  { id: PAGE_IDS.SAVINGS, label: "Reserva", icon: "\u{1F4B5}" },
   { id: PAGE_IDS.CONFERENCE, label: "Conferencia", icon: "\u{1F4C8}" },
   { id: PAGE_IDS.SETTINGS, label: "Configuracoes", icon: "\u2699" }
 ];
@@ -68,4 +64,10 @@ export const DEFAULT_TRANSACTION = {
   method: "pix",
   value: 0,
   date: ""
+};
+
+export const DEFAULT_SETTINGS = {
+  expenseCategories: CATEGORIES,
+  paymentMethods: PAYMENT_METHODS,
+  savingLocations: ["carteira", "conta bancaria", "reserva", "investimentos"]
 };
