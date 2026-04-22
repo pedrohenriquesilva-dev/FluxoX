@@ -1,0 +1,127 @@
+.line-chart {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  padding: 1rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.line-chart__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.line-chart__title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.line-chart__subtitle {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+.line-chart__container {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+}
+
+/* Tooltip customizado */
+.line-chart__tooltip {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+  pointer-events: none;
+}
+
+.line-chart__tooltip-month {
+  font-weight: 600;
+  font-size: 0.875rem;
+  margin: 0 0 0.5rem 0;
+  color: var(--text);
+}
+
+.line-chart__tooltip-value {
+  font-size: 0.8rem;
+  margin: 0.25rem 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  color: var(--text);
+}
+
+.line-chart__tooltip-value span {
+  font-weight: 600;
+}
+
+/* Estilos Recharts */
+.line-chart__recharts {
+  display: flex;
+  justify-content: center;
+}
+
+/* Customização de linhas */
+.line-chart__recharts .recharts-line {
+  transition: all 0.2s ease;
+}
+
+.line-chart__recharts .recharts-line-dot {
+  transition: all 0.2s ease;
+}
+
+.line-chart__recharts .recharts-line-dot:hover {
+  filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.25));
+}
+
+/* Grid customizada */
+.line-chart__recharts .recharts-cartesian-axis-line {
+  stroke: var(--border) !important;
+}
+
+.line-chart__recharts .recharts-cartesian-axis-tick-value {
+  fill: var(--muted) !important;
+  font-size: 0.75rem;
+}
+
+/* Legend customizada */
+.line-chart__recharts .recharts-legend-wrapper {
+  padding-top: 1rem !important;
+}
+
+.line-chart__recharts .recharts-legend-item-text {
+  color: var(--text) !important;
+  font-size: 0.875rem !important;
+}
+
+.line-chart__recharts .recharts-legend-item {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.line-chart__recharts .recharts-legend-item:hover .recharts-legend-item-text {
+  font-weight: 600;
+}
+
+/* Responsivo para mobile */
+@media (max-width: 768px) {
+  .line-chart {
+    padding: 0.75rem;
+  }
+
+  .line-chart__container {
+    overflow-x: auto;
+  }
+
+  .line-chart__recharts {
+    min-width: 100%;
+  }
+}

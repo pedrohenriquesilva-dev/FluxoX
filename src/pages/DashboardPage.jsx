@@ -1,5 +1,6 @@
 import AccumulatedTable from "../components/ui/AccumulatedTable.jsx";
 import BarChart from "../components/ui/BarChart.jsx";
+import LineChart from "../components/ui/LineChart.jsx";
 import PageHeader from "../components/ui/PageHeader.jsx";
 import PieChart from "../components/ui/PieChart.jsx";
 import StatCard from "../components/ui/StatCard.jsx";
@@ -44,6 +45,7 @@ export default function DashboardPage({ finance }) {
       </div>
 
       <BarChart data={finance.monthly.accumulation} />
+      <LineChart data={finance.monthly.lineChartData} monthlyGoal={finance.goal.value} />
       <AccumulatedTable rows={finance.monthly.accumulation} />
     </section>
   );
