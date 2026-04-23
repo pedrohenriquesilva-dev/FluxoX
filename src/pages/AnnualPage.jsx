@@ -1,6 +1,8 @@
 import PropTypes from "prop-types";
 import PageHeader from "../components/ui/PageHeader.jsx";
+import ExportButton from "../components/ui/ExportButton.jsx";
 import { financeShape } from "../utils/propTypes.js";
+import { exportAnnualToCSV } from "../utils/exportCsv.js";
 import { fmt } from "../utils/formatters.js";
 import "./AnnualPage.css";
 
@@ -30,6 +32,12 @@ export default function AnnualPage({ finance }) {
       <PageHeader
         title="Visao Anual"
         subtitle="Tabela estrategica de janeiro a dezembro com consolidado financeiro completo."
+        rightSlot={(
+          <ExportButton
+            onExport={() => exportAnnualToCSV(tableRows)}
+            label="Exportar Resumo"
+          />
+        )}
       />
 
       <div className="annual-page__stats">

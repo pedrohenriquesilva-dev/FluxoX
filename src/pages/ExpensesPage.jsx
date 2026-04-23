@@ -3,9 +3,11 @@ import PropTypes from "prop-types";
 import TransactionForm from "../components/transactions/TransactionForm.jsx";
 import TransactionList from "../components/transactions/TransactionList.jsx";
 import PageHeader from "../components/ui/PageHeader.jsx";
+import ExportButton from "../components/ui/ExportButton.jsx";
 import StatCard from "../components/ui/StatCard.jsx";
 import { transactionShape } from "../utils/propTypes.js";
 import { PAYMENT_METHODS, TRANSACTION_TYPES } from "../utils/constants.js";
+import { exportExpensesToCSV } from "../utils/exportCsv.js";
 import { filterByMethod, fmt, sortByValue } from "../utils/formatters.js";
 import "./ExpensesPage.css";
 
@@ -51,6 +53,12 @@ export default function ExpensesPage({
       <PageHeader
         title="Despesas"
         subtitle="Cadastre, edite e exclua despesas em um fluxo unico de CRUD."
+        rightSlot={(
+          <ExportButton
+            onExport={() => exportExpensesToCSV(visibleTransactions)}
+            label="Exportar Despesas"
+          />
+        )}
       />
       <div className="expenses-page__controls">
         <label className="expenses-page__control" htmlFor="expenses-method-filter">

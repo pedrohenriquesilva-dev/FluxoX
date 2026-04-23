@@ -3,9 +3,11 @@ import PropTypes from "prop-types";
 import TransactionForm from "../components/transactions/TransactionForm.jsx";
 import TransactionList from "../components/transactions/TransactionList.jsx";
 import PageHeader from "../components/ui/PageHeader.jsx";
+import ExportButton from "../components/ui/ExportButton.jsx";
 import StatCard from "../components/ui/StatCard.jsx";
 import { transactionShape } from "../utils/propTypes.js";
 import { TRANSACTION_TYPES } from "../utils/constants.js";
+import { exportIncomesToCSV } from "../utils/exportCsv.js";
 import { filterByMethod, fmt, sortByValue } from "../utils/formatters.js";
 import "./IncomesPage.css";
 
@@ -69,6 +71,12 @@ export default function IncomesPage({
       <PageHeader
         title="Receitas"
         subtitle="Registre entradas, acompanhe fontes de renda e mantenha o fluxo positivo."
+        rightSlot={(
+          <ExportButton
+            onExport={() => exportIncomesToCSV(visibleTransactions)}
+            label="Exportar Receitas"
+          />
+        )}
       />
       <div className="incomes-page__controls">
         <label className="incomes-page__control" htmlFor="incomes-method-filter">

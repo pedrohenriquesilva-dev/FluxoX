@@ -110,3 +110,11 @@
     min-height: 34px;
   }
 }
+
+/* Header row for export button */
+.expenses-page__header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}

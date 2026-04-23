@@ -99,3 +99,11 @@
     font-size: 0.82rem;
   }
 }
+
+/* Header row for export button */
+.annual-page__header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
