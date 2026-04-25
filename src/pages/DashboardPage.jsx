@@ -1,6 +1,8 @@
+import { useState } from "react";
 import AccumulatedTable from "../components/ui/AccumulatedTable.jsx";
 import BarChart from "../components/ui/BarChart.jsx";
 import LineChart from "../components/ui/LineChart.jsx";
+import MonthlySummaryModal from "../components/ui/MonthlySummaryModal.jsx";
 import PageHeader from "../components/ui/PageHeader.jsx";
 import PieChart from "../components/ui/PieChart.jsx";
 import StatCard from "../components/ui/StatCard.jsx";
@@ -10,6 +12,8 @@ import { fmt } from "../utils/formatters.js";
 import "./DashboardPage.css";
 
 export default function DashboardPage({ finance }) {
+  const [showSummaryModal, setShowSummaryModal] = useState(false);
+
   if (!finance) return null;
 
   return (
@@ -18,9 +22,18 @@ export default function DashboardPage({ finance }) {
         title="Dashboard"
         subtitle="Visao consolidada das financas com foco em saldo, meta e acumulado anual."
         rightSlot={(
-          <p className={`dashboard-page__goal ${finance.goal.reached ? "text-success" : "text-warning"}`}>
-            Meta do mes: {fmt(finance.monthly.savings)} / {fmt(finance.goal.value)}
-          </p>
+          <div className="dashboard-page__header-actions">
+            <button
+              className="dashboard-page__share-button"
+              onClick={() => setShowSummaryModal(true)}
+              type="button"
+            >
+              📤 Compartilhar resumo
+            </button>
+            <p className={`dashboard-page__goal ${finance.goal.reached ? "text-success" : "text-warning"}`}>
+              Meta do mes: {fmt(finance.monthly.savings)} / {fmt(finance.goal.value)}
+            </p>
+          </div>
         )}
       />
 
@@ -47,6 +60,14 @@ export default function DashboardPage({ finance }) {
       <BarChart data={finance.monthly.accumulation} />
       <LineChart data={finance.monthly.lineChartData} monthlyGoal={finance.goal.value} />
       <AccumulatedTable rows={finance.monthly.accumulation} />
+
+      {showSummaryModal && (
+        <MonthlySummaryModal
+          monthlyData={finance.monthly}
+          goal={finance.goal.value}
+          onClose={() => setShowSummaryModal(false)}
+        />
+      )}
     </section>
   );
 }

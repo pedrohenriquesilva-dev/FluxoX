@@ -38,6 +38,12 @@ export const financeShape = PropTypes.shape({
         expense: PropTypes.number,
         balance: PropTypes.number
       })
+    ),
+    lineChartData: PropTypes.arrayOf(
+      PropTypes.shape({
+        month: PropTypes.number,
+        accumulated: PropTypes.number
+      })
     )
   }),
   goal: PropTypes.shape({
