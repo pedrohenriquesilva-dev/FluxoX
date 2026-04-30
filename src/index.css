@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Sora:wght@400;500;600;700;800&display=swap");
 
-:root {
+:root,
+[data-theme="dark"] {
   --bg: #0e1320;
   --card: #121a2b;
   --card2: #1a2440;
@@ -17,6 +18,19 @@
   --radius-md: 14px;
   --radius-lg: 20px;
   --sidebar-w: 280px;
+}
+
+[data-theme="light"] {
+  --bg: #f8f9fa;
+  --card: #ffffff;
+  --card2: #f3f5f7;
+  --border: #e0e4e8;
+  --text: #1a1f35;
+  --muted: #6b7280;
+  --accent: #5b8af5;
+  --success: #2dcf95;
+  --danger: #ff6b7a;
+  --warning: #ffc35a;
 }
 
 * {
@@ -56,6 +70,7 @@ body {
   line-height: 1.35;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .text-muted {

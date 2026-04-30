@@ -1,3 +1,4 @@
+import ThemeToggle from "./ThemeToggle.jsx";
 import "./Sidebar.css";
 
 const NAV_ITEMS = [
@@ -10,17 +11,20 @@ const NAV_ITEMS = [
   { id: "settings", icon: "\u2699", label: "Configuracoes" }
 ];
 
-export default function Sidebar({ currentPage, onNavigate }) {
+export default function Sidebar({ currentPage, onNavigate, isDark, onToggleTheme }) {
   const today = new Date().toLocaleDateString("pt-BR");
 
   return (
     <aside className="sidebar">
-      <div className="sidebar__logo">
-        <div className="sidebar__logo-mark">{"\u{1F4B0}"}</div>
-        <div>
-          <div className="sidebar__logo-name">FluxoX</div>
-          <div className="sidebar__logo-sub">Controle financeiro</div>
+      <div className="sidebar__top">
+        <div className="sidebar__logo">
+          <div className="sidebar__logo-mark">{"\u{1F4B0}"}</div>
+          <div>
+            <div className="sidebar__logo-name">FluxoX</div>
+            <div className="sidebar__logo-sub">Controle financeiro</div>
+          </div>
         </div>
+        <ThemeToggle isDark={isDark} onToggle={onToggleTheme} />
       </div>
 
       <nav className="sidebar__nav" aria-label="Navegacao principal">

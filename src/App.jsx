@@ -1,6 +1,7 @@
 import Layout from "./components/ui/Layout.jsx";
 import useFinance from "./hooks/useFinance.js";
 import useLocalStorage from "./hooks/useLocalStorage.js";
+import useTheme from "./hooks/useTheme.js";
 import AnnualPage from "./pages/AnnualPage.jsx";
 import ConferencePage from "./pages/ConferencePage.jsx";
 import DashboardPage from "./pages/DashboardPage.jsx";
@@ -12,6 +13,7 @@ import Placeholder from "./pages/Placeholder.jsx";
 import { STORAGE_KEYS } from "./utils/storage.js";
 
 function App() {
+  const { isDark, toggleTheme } = useTheme();
   const [page, setPage] = useLocalStorage(STORAGE_KEYS.ACTIVE_PAGE, "dashboard");
   const [expenseTransactions, setExpenseTransactions] = useLocalStorage(
     STORAGE_KEYS.EXPENSE_TRANSACTIONS,
@@ -36,7 +38,7 @@ function App() {
   });
 
   return (
-    <Layout currentPage={page} onNavigate={setPage}>
+    <Layout currentPage={page} onNavigate={setPage} isDark={isDark} onToggleTheme={toggleTheme}>
       {page === "dashboard" ? <DashboardPage finance={finance} /> : null}
       {page === "annual" ? <AnnualPage finance={finance} /> : null}
 
