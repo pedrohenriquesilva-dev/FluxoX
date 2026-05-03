@@ -68,6 +68,8 @@ function App() {
         <ConferencePage
           finance={finance}
           savingsByMonth={savingsByMonth}
+          expenses={expenseTransactions}
+          incomes={incomeTransactions}
         />
       ) : null}
 
