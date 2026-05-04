@@ -7,6 +7,7 @@ import ConferencePage from "./pages/ConferencePage.jsx";
 import DashboardPage from "./pages/DashboardPage.jsx";
 import ExpensesPage from "./pages/ExpensesPage.jsx";
 import IncomesPage from "./pages/IncomesPage.jsx";
+import ReportsPage from "./pages/ReportsPage.jsx";
 import SettingsPage from "./pages/SettingsPage.jsx";
 import SavingsPage from "./pages/SavingsPage.jsx";
 import Placeholder from "./pages/Placeholder.jsx";
@@ -73,6 +74,13 @@ function App() {
         />
       ) : null}
 
+      {page === "reports" ? (
+        <ReportsPage
+          expenses={expenseTransactions}
+          incomes={incomeTransactions}
+        />
+      ) : null}
+
       {page === "settings" ? (
         <SettingsPage
           settings={settings}
@@ -88,6 +96,7 @@ function App() {
       page !== "incomes" &&
       page !== "savings" &&
       page !== "conference" &&
+      page !== "reports" &&
       page !== "settings" ? (
         <Placeholder page={page} />
       ) : null}
