@@ -1,6 +1,7 @@
 import { useState } from "react";
 import AccumulatedTable from "../components/ui/AccumulatedTable.jsx";
 import BarChart from "../components/ui/BarChart.jsx";
+import DashboardSkeleton from "../components/ui/DashboardSkeleton.jsx";
 import LineChart from "../components/ui/LineChart.jsx";
 import MonthlySummaryModal from "../components/ui/MonthlySummaryModal.jsx";
 import PageHeader from "../components/ui/PageHeader.jsx";
@@ -9,12 +10,19 @@ import StatCard from "../components/ui/StatCard.jsx";
 import PropTypes from "prop-types";
 import { financeShape } from "../utils/propTypes.js";
 import { fmt } from "../utils/formatters.js";
+import useLoading from "../hooks/useLoading.js";
 import "./DashboardPage.css";
 
 export default function DashboardPage({ finance }) {
   const [showSummaryModal, setShowSummaryModal] = useState(false);
+  const isLoading = useLoading(1200); // 1.2 segundos de loading
 
   if (!finance) return null;
+
+  // Mostra skeleton durante loading
+  if (isLoading) {
+    return <DashboardSkeleton />;
+  }
 
   return (
     <section className="dashboard-page">
