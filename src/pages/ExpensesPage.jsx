@@ -9,6 +9,7 @@ import { transactionShape } from "../utils/propTypes.js";
 import { PAYMENT_METHODS, TRANSACTION_TYPES } from "../utils/constants.js";
 import { exportExpensesToCSV } from "../utils/exportCsv.js";
 import { filterByMethod, fmt, sortByValue } from "../utils/formatters.js";
+import useToast from "../hooks/useToast.js";
 import "./ExpensesPage.css";
 
 export default function ExpensesPage({
@@ -18,6 +19,7 @@ export default function ExpensesPage({
   const [editingTransaction, setEditingTransaction] = useState(null);
   const [methodFilter, setMethodFilter] = useState("");
   const [valueOrder, setValueOrder] = useState("desc");
+  const toast = useToast();
 
   const visibleTransactions = useMemo(() => {
     const filtered = filterByMethod(transactions, methodFilter);
@@ -41,11 +43,13 @@ export default function ExpensesPage({
       return [transaction, ...prev];
     });
     setEditingTransaction(null);
+    toast.success(editingTransaction ? "Despesa atualizada com sucesso!" : "Despesa adicionada com sucesso!");
   }
 
   function deleteTransaction(id) {
     onTransactionsChange?.((prev) => prev.filter((item) => item.id !== id));
     setEditingTransaction((prev) => (prev?.id === id ? null : prev));
+    toast.success("Despesa excluída com sucesso!");
   }
 
   return (
@@ -55,7 +59,10 @@ export default function ExpensesPage({
         subtitle="Cadastre, edite e exclua despesas em um fluxo unico de CRUD."
         rightSlot={(
           <ExportButton
-            onExport={() => exportExpensesToCSV(visibleTransactions)}
+            onExport={() => {
+              exportExpensesToCSV(visibleTransactions);
+              toast.success("Despesas exportadas com sucesso!");
+            }}
             label="Exportar Despesas"
           />
         )}

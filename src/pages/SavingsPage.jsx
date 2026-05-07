@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import PageHeader from "../components/ui/PageHeader.jsx";
 import { financeShape } from "../utils/propTypes.js";
 import { fmt } from "../utils/formatters.js";
+import useToast from "../hooks/useToast.js";
 import "./SavingsPage.css";
 
 const MONTHS = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
@@ -24,6 +25,7 @@ export default function SavingsPage({
   onSavingsByMonthChange
 }) {
   const [monthIndex, setMonthIndex] = useState(finance?.monthly?.index ?? new Date().getMonth());
+  const toast = useToast();
 
   const monthRecord = savingsByMonth[monthIndex] ?? {};
   const savedTotal = LOCATIONS.reduce((acc, item) => acc + toNumber(monthRecord[item.key]), 0);
@@ -45,6 +47,7 @@ export default function SavingsPage({
         [locationKey]: toNumber(value)
       }
     }));
+    toast.success(`Valor atualizado em ${LOCATIONS.find(loc => loc.key === locationKey)?.label || locationKey}!`);
   }
 
   return (

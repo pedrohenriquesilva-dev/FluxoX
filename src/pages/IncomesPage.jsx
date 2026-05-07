@@ -9,6 +9,7 @@ import { transactionShape } from "../utils/propTypes.js";
 import { TRANSACTION_TYPES } from "../utils/constants.js";
 import { exportIncomesToCSV } from "../utils/exportCsv.js";
 import { filterByMethod, fmt, sortByValue } from "../utils/formatters.js";
+import useToast from "../hooks/useToast.js";
 import "./IncomesPage.css";
 
 const INCOME_CATEGORIES = [
@@ -36,6 +37,7 @@ export default function IncomesPage({
   const [editingTransaction, setEditingTransaction] = useState(null);
   const [methodFilter, setMethodFilter] = useState("");
   const [valueOrder, setValueOrder] = useState("desc");
+  const toast = useToast();
 
   const visibleTransactions = useMemo(() => {
     const filtered = filterByMethod(transactions, methodFilter);
@@ -59,11 +61,13 @@ export default function IncomesPage({
       return [transaction, ...prev];
     });
     setEditingTransaction(null);
+    toast.success(editingTransaction ? "Receita atualizada com sucesso!" : "Receita adicionada com sucesso!");
   }
 
   function deleteTransaction(id) {
     onTransactionsChange?.((prev) => prev.filter((item) => item.id !== id));
     setEditingTransaction((prev) => (prev?.id === id ? null : prev));
+    toast.success("Receita excluída com sucesso!");
   }
 
   return (
@@ -73,7 +77,10 @@ export default function IncomesPage({
         subtitle="Registre entradas, acompanhe fontes de renda e mantenha o fluxo positivo."
         rightSlot={(
           <ExportButton
-            onExport={() => exportIncomesToCSV(visibleTransactions)}
+            onExport={() => {
+              exportIncomesToCSV(visibleTransactions);
+              toast.success("Receitas exportadas com sucesso!");
+            }}
             label="Exportar Receitas"
           />
         )}

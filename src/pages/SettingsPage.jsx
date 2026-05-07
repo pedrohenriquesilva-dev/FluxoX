@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import PageHeader from "../components/ui/PageHeader.jsx";
 import { CATEGORIES, PAYMENT_METHODS } from "../utils/constants.js";
 import { settingsShape } from "../utils/propTypes.js";
+import useToast from "../hooks/useToast.js";
 import "./SettingsPage.css";
 
 const DEFAULT_SETTINGS = {
@@ -64,6 +65,7 @@ export default function SettingsPage({
   const [categoryInput, setCategoryInput] = useState("");
   const [methodInput, setMethodInput] = useState("");
   const [locationInput, setLocationInput] = useState("");
+  const toast = useToast();
 
   function addItem(key, rawValue) {
     const value = normalizeText(rawValue);
@@ -73,6 +75,7 @@ export default function SettingsPage({
       if (base[key].includes(value)) return base;
       return { ...base, [key]: [...base[key], value] };
     });
+    toast.success(`${value} adicionado com sucesso!`);
   }
 
   function removeItem(key, valueToRemove) {
@@ -81,11 +84,13 @@ export default function SettingsPage({
       const next = base[key].filter((item) => item !== valueToRemove);
       return { ...base, [key]: next.length > 0 ? next : base[key] };
     });
+    toast.success(`${valueToRemove} removido com sucesso!`);
   }
 
   function saveSettings() {
     const parsedGoal = Number(goalDraft);
     onMonthlyGoalChange?.(Number.isFinite(parsedGoal) ? parsedGoal : 0);
+    toast.success("Meta mensal salva com sucesso!");
   }
 
   return (
