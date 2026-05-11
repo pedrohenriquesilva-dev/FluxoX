@@ -39,7 +39,14 @@ function App() {
   });
 
   return (
-    <Layout currentPage={page} onNavigate={setPage} isDark={isDark} onToggleTheme={toggleTheme}>
+    <Layout 
+      currentPage={page} 
+      onNavigate={setPage} 
+      isDark={isDark} 
+      onToggleTheme={toggleTheme}
+      expenses={expenseTransactions}
+      incomes={incomeTransactions}
+    >
       {page === "dashboard" ? <DashboardPage finance={finance} /> : null}
       {page === "annual" ? <AnnualPage finance={finance} /> : null}
 
