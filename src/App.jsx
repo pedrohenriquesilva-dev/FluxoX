@@ -9,8 +9,7 @@ import ExpensesPage from "./pages/ExpensesPage.jsx";
 import IncomesPage from "./pages/IncomesPage.jsx";
 import ReportsPage from "./pages/ReportsPage.jsx";
 import SettingsPage from "./pages/SettingsPage.jsx";
-import SavingsPage from "./pages/SavingsPage.jsx";
-import Placeholder from "./pages/Placeholder.jsx";
+import SavingsPage from "./pages/SavingsPage.jsx";import StatsPage from "./pages/StatsPage.jsx";import Placeholder from "./pages/Placeholder.jsx";
 import { STORAGE_KEYS } from "./utils/storage.js";
 
 function App() {
@@ -88,6 +87,14 @@ function App() {
         />
       ) : null}
 
+      {page === "stats" ? (
+        <StatsPage
+          expenses={expenseTransactions}
+          incomes={incomeTransactions}
+          finance={finance}
+        />
+      ) : null}
+
       {page === "settings" ? (
         <SettingsPage
           settings={settings}
@@ -104,6 +111,7 @@ function App() {
       page !== "savings" &&
       page !== "conference" &&
       page !== "reports" &&
+      page !== "stats" &&
       page !== "settings" ? (
         <Placeholder page={page} />
       ) : null}

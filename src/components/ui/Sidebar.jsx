@@ -9,6 +9,7 @@ const NAV_ITEMS = [
   { id: "savings", icon: "\u{1F4B5}", label: "Poupanca" },
   { id: "conference", icon: "\u{1F4C8}", label: "Conferencia" },
   { id: "reports", icon: "\u{1F4CA}", label: "Relatorios" },
+  { id: "stats", icon: "\u{1F4C8}", label: "★ Estatisticas" },
   { id: "settings", icon: "\u2699", label: "Configuracoes" }
 ];
 

@@ -1,0 +1,293 @@
+.stats-page {
+  display: grid;
+  gap: 2rem;
+}
+
+.stats-page__overview {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.stats-page__section {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.stats-page__section-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Recordes */
+.stats-page__records {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.stats-page__record-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.2s ease;
+}
+
+.stats-page__record-card:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--card2) 80%, transparent);
+}
+
+.stats-page__record-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.stats-page__record-content {
+  display: grid;
+  gap: 0.25rem;
+  flex: 1;
+}
+
+.stats-page__record-content h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+}
+
+.stats-page__record-value {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.stats-page__record-detail {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* Médias */
+.stats-page__averages {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.stats-page__average-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.stats-page__average-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.stats-page__average-content {
+  display: grid;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.stats-page__average-content h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+}
+
+.stats-page__average-value {
+  font-size: 0.9rem;
+  color: var(--text);
+  margin: 0;
+}
+
+/* Preferências */
+.stats-page__preferences {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+}
+
+.stats-page__preference-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.stats-page__preference-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.stats-page__preference-content {
+  display: grid;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.stats-page__preference-content h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+}
+
+.stats-page__preference-value {
+  font-size: 0.85rem;
+  color: var(--text);
+  margin: 0;
+}
+
+/* Gráfico mensal */
+.stats-page__monthly-chart {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  padding: 1.5rem;
+  overflow-x: auto;
+}
+
+.stats-page__month-bar {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 60px;
+  margin: 0 0.25rem;
+}
+
+.stats-page__month-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-align: center;
+}
+
+.stats-page__month-bars {
+  display: flex;
+  align-items: end;
+  gap: 2px;
+  height: 120px;
+  position: relative;
+}
+
+.stats-page__month-income {
+  width: 20px;
+  background: var(--success);
+  border-radius: 2px 2px 0 0;
+  min-height: 2px;
+  transition: all 0.3s ease;
+}
+
+.stats-page__month-expense {
+  width: 20px;
+  background: var(--danger);
+  border-radius: 2px 2px 0 0;
+  min-height: 2px;
+  transition: all 0.3s ease;
+}
+
+.stats-page__month-balance {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 0.25rem;
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+  .stats-page__records,
+  .stats-page__averages,
+  .stats-page__preferences {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-page__monthly-chart {
+    padding: 1rem;
+  }
+
+  .stats-page__month-bar {
+    min-width: 50px;
+    margin: 0 0.125rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .stats-page {
+    gap: 1.5rem;
+  }
+
+  .stats-page__overview {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .stats-page__record-card,
+  .stats-page__average-card,
+  .stats-page__preference-card {
+    padding: 1rem;
+    gap: 0.75rem;
+  }
+
+  .stats-page__record-icon,
+  .stats-page__average-icon,
+  .stats-page__preference-icon {
+    font-size: 1.5rem;
+  }
+
+  .stats-page__section-title {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-page__overview {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-page__record-card,
+  .stats-page__average-card,
+  .stats-page__preference-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+
+  .stats-page__monthly-chart {
+    padding: 0.75rem;
+  }
+
+  .stats-page__month-bar {
+    min-width: 40px;
+  }
+
+  .stats-page__month-bars {
+    height: 80px;
+  }
+
+  .stats-page__month-income,
+  .stats-page__month-expense {
+    width: 16px;
+  }
+}
