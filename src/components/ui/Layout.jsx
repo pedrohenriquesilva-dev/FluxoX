@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import MobileNav from "./MobileNav.jsx";
 import Sidebar from "./Sidebar.jsx";
 import GlobalSearch from "./GlobalSearch.jsx";
+import ScrollToTop from "./ScrollToTop.jsx";
 import "./Layout.css";
 
 export default function Layout({ 
@@ -14,7 +15,6 @@ export default function Layout({
   children 
 }) {
   function handleSelectTransaction(transaction) {
-    // Navegar para a página apropriada
     if (transaction.type === "expense") {
       onNavigate("expenses");
     } else if (transaction.type === "income") {
@@ -23,8 +23,8 @@ export default function Layout({
   }
 
   return (
-    <div className="layout">
-      <aside className="layout__sidebar-wrap">
+    <div className="layout" role="application">
+      <aside className="layout__sidebar-wrap" aria-label="Navegação principal">
         <Sidebar 
           currentPage={currentPage} 
           onNavigate={onNavigate} 
@@ -33,15 +33,18 @@ export default function Layout({
         />
       </aside>
       <div className="layout__content">
-        <header className="layout__search-header">
+        <header className="layout__search-header" aria-label="Busca global">
           <GlobalSearch 
             expenses={expenses}
             incomes={incomes}
             onSelectTransaction={handleSelectTransaction}
           />
         </header>
-        <main className="layout__main">{children}</main>
+        <main id="main-content" className="layout__main" tabIndex={-1}>
+          {children}
+        </main>
         <MobileNav currentPage={currentPage} onNavigate={onNavigate} />
+        <ScrollToTop />
       </div>
     </div>
   );
