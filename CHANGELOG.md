@@ -1,257 +1,133 @@
-# CHANGELOG — FluxoX
+# Changelog — FluxoX
 
-Todas as mudanças notáveis neste projeto são documentadas neste arquivo.
+## [2.0.0] — 2026 · v2.0 Final
 
----
+### Fase 9 — Melhorias pós-lançamento (Dias 31–40)
 
-## [1.0.0] — 2026-04-29
+### Dia 40 — README v2.0 e release final
+- README completamente reescrito com todas as 40 fases documentadas
+- Tabela de 40 commits com mensagens reais
+- Arquitetura atualizada com 24 componentes e 9 páginas
+- Sistema de design documentado para dark e light mode
+- Decisões técnicas expandidas
+- Release v2.0 publicada no GitHub
 
-### ✨ Fase 6: Gráficos Interativos com Recharts
+### Dia 39 — Polimento e acessibilidade
+- `index.css` com `focus-visible` para navegação por teclado
+- Suporte a `@media print` — sidebar e topbar somem ao imprimir
+- `EmptyState` — componente padronizado de estado vazio
+- `ScrollToTop` — botão animado para voltar ao topo
+- `Layout` atualizado com `role="banner"`, `id="main-content"` e `tabIndex`
 
-#### Added
-- **Recharts 2.14.2** integrado ao projeto
-- **BarChart.jsx** com gráfico interativo de barras (Entradas vs Saídas)
-  - Hover effects com brightness
-  - Tooltip customizado com formatação de moeda
-  - Barras lado a lado com cores (sucesso/perigo)
-  - Responsivo para mobile
-- **PieChart.jsx** migrado para Recharts com design donut
-  - Hover interativo nas fatias
-  - Legend com formatação de moeda
-  - Estado de seleção visual
-  - Responsivo
-- **LineChart.jsx** novo com acumulado vs meta
-  - Linha sólida para acumulado real
-  - Linha tracejada para meta desejada
-  - Animações suaves
-  - Tooltip com informações de ambas as linhas
+### Dia 38 — Tela de Estatísticas
+- `StatsPage` com 4 seções: visão geral, recordes, hábitos e evolução
+- 6 cards de visão geral (total de lançamentos, taxa de economia, médias)
+- Recordes automáticos: mês mais caro, melhor receita, maior despesa individual
+- Hábitos: categoria que mais pesou, forma de pagamento favorita
+- Grade de evolução mensal com economia e acumulado por mês
+- Sidebar atualizada com 9 itens de navegação
 
-#### Changed
-- BarChart.css: Estilos refatorados para Recharts (GridBox, hover, responsivo)
-- PieChart.css: Refatorado com tooltip e legend customizados
-- useFinance.js: Adicionado `lineChartData` para calcular acumulado progressivo
+### Dia 37 — Busca global
+- `useGlobalSearch` — busca em descrição, categoria, forma e mês
+- `GlobalSearch` — dropdown com resultados agrupados por tipo
+- Highlight do texto buscado em azul nos resultados
+- Atalho `Ctrl+K` para focar a busca de qualquer lugar
+- `Esc` fecha o dropdown
+- Layout atualizado com topbar sticky contendo a busca
 
-#### Technical
-- Todos os gráficos usam CSS variables (--success, --accent, --warning, --danger)
-- Transições suaves de 0.2s ease em todas as interações
-- Responsivos com grid e containers flexíveis
+### Dia 36 — Toast notifications
+- `useToast` — hook com atalhos success, error, warning, info
+- `ToastContainer` — componente puro sem import de contexto
+- `ToastContext` — contexto global via React Context API
+- `ToastProvider` envolvendo a App em `main.jsx`
+- 4 páginas atualizadas: Despesas, Receitas, Guardado, Premissas
+- Posicionamento mobile acima da MobileNav
 
----
+### Dia 35 — Skeleton loading
+- `Skeleton` — componente com 4 variantes e animação shimmer
+- `DashboardSkeleton` — replica o layout do Dashboard com placeholders
+- `useLoading` — hook com delay configurável
+- Dashboard mostra skeleton por 700ms antes do conteúdo real
+- `prefers-reduced-motion` respeita preferência do usuário
 
-### 📋 Fase 7: Exportação de Dados para CSV
+### Dia 34 — Tela de Relatórios
+- `ReportsPage` com filtro de período, abas e 3 seções
+- Análise por categoria com barra de progresso e percentual
+- Análise por forma de pagamento com mesmo padrão
+- Gráfico de barras nativo de evolução mensal
+- Período selecionado destaca barras, fora do período fica opaco
 
-#### Added
-- **exportCsv.js** utility com 3 funções principais
-  - `exportExpensesToCSV()` - Exporta despesas filtradas
-  - `exportIncomesToCSV()` - Exporta receitas filtradas
-  - `exportAnnualToCSV()` - Exporta resumo anual
-- **ExportButton.jsx** componente reutilizável
-  - Ícone de download SVG
-  - Estado de loading com spinner animado
-  - Feedback de sucesso/erro
-  - Responsivo para mobile
-- **ExportButton.css** com estilos elegantes
-  - Hover effects (transform, brightness)
-  - Spinner CSS animado (@keyframes spin)
-  - Estados disabled
-- Integração em **ExpensesPage.jsx**
-- Integração em **IncomesPage.jsx**
-- Integração em **AnnualPage.jsx**
+### Dia 33 — Conferência melhorada e filtro de período
+- `PeriodFilter` — seletor de mês inicial → mês final reutilizável
+- `filterByPeriod` — função utilitária para filtrar por intervalo
+- `ConferencePage` reescrita com linhas expandíveis
+- Chevron animado (90° quando expandido)
+- Cards recalculam pelo período selecionado
 
-#### Features
-- ✅ Exporta dados **filtrados** (não todos)
-- ✅ Formatação brasileira: datas (DD/MM/YYYY), moedas (1.234,56)
-- ✅ CSV com escape de caracteres especiais
-- ✅ Headers em português
-- ✅ Download automático no navegador
+### Dia 32 — Tema claro/escuro
+- `useTheme` — lê preferência do sistema, persiste no localStorage
+- Tema claro com 8 tokens de cor redesenhados
+- `ThemeToggle` — botão com ícone sol/lua e animação no clique
+- `[data-theme='light']` aplicado no `<html>`
+- Transição suave de 300ms ao trocar tema
 
-#### Changed
-- ExpensesPage.jsx: Adicionado ExportButton no header
-- IncomesPage.jsx: Adicionado ExportButton no header
-- AnnualPage.jsx: Adicionado ExportButton no header
-- ExpensesPage.css: Adicionado `.expenses-page__header-row`
-- IncomesPage.css: Adicionado `.incomes-page__header-row`
-- AnnualPage.css: Adicionado `.annual-page__header-row`
-
----
-
-### 📤 Compartilhamento de Resumo Mensal
-
-#### Added
-- **exportText.js** utility com funções de texto
-  - `generateMonthlySummary()` - Gera texto formatado do mês
-  - `copyToClipboard()` - Copia para clipboard (moderno + fallback)
-- **MonthlySummaryModal.jsx** componente modal elegante
-  - Exibe resumo formatado em monospace
-  - Botão "Copiar" com feedback visual
-  - Botão "Compartilhar" (Web Share API)
-  - Fechar com overlay click ou botão X
-  - Responsivo para mobile
-- **MonthlySummaryModal.css** estilos completos
-  - Modal com backdrop blur
-  - Overlay semi-transparente
-  - Box shadow elegante
-  - Transições suaves
-  - Responsivo (768px e 480px)
-- Integração no **DashboardPage.jsx**
-  - Novo botão "📤 Compartilhar resumo" no header
-  - Estado `showSummaryModal` com toggle
-  - Props `monthlyData` e `goal` passadas corretamente
-
-#### Features
-- ✅ Resumo contém: Receitas, Despesas, Economia, Meta, Status
-- ✅ Emojis para visualização rápida (💰, 💸, 💾, 🎯, 🎉)
-- ✅ Formatação com quebras de linha claras
-- ✅ Copia com fallback para navegadores antigos
-- ✅ Usa Web Share API quando disponível (móvel)
-- ✅ Feedback visual quando cópia é bem-sucedida
-
-#### Changed
-- DashboardPage.jsx: Adicionado MonthlySummaryModal e botão
-- DashboardPage.css: Adicionados `.dashboard-page__header-actions` e `.dashboard-page__share-button`
-- propTypes.js: Atualizado financeShape com lineChartData
+### Dia 31 — Animações de entrada
+- `useAnimation` — IntersectionObserver sem dependências
+- `Animated` — wrapper com 6 tipos: fade-up, fade-down, fade-left, fade-right, fade, scale
+- Efeito stagger nos KPI cards (80ms de delay entre cada)
+- BarChart e PieChart entram de lados opostos
+- `prefers-reduced-motion` desabilita animações quando necessário
 
 ---
 
-### 📱 PWA (Progressive Web App)
+## [1.0.0] — 2026 · v1.0
 
-#### Added
-- **vite-plugin-pwa@0.20.5** integrado
-- **manifest.json** gerado automaticamente com:
-  - Nome: FluxoX - Controle Financeiro
-  - Short name: FluxoX
-  - Tema: Azul (#5b8af5)
-  - Icons: 192×192 e 512×512
-  - Display: standalone
-  - Orientação: portrait
-- **Service Worker** com:
-  - Caching de assets (JS, CSS, HTML, SVG, PNG)
-  - Estratégia CacheFirst para Google Fonts (365 dias)
-  - Auto-update em background
-  - Offline support completo
-- **vite.config.js** atualizado com VitePWA plugin
+### Fase 8 — PWA e Finalização (Dias 29–30)
+- PWA com vite-plugin-pwa, manifest, service worker e ícones
+- Cache offline de assets e fontes Google via Workbox
+- `usePWAInstall` e `InstallBanner` na sidebar
+- Meta tags PWA, iOS e Open Graph
+- README v1.0, LICENSE e CHANGELOG
 
-#### Features
-- ✅ Instalável no Chrome, Edge, Firefox, Safari
-- ✅ Funciona completamente offline
-- ✅ Sincronização automática ao reconectar
-- ✅ Ícones customizáveis
-- ✅ Cache de fontes por 1 ano
-- ✅ Auto-update de versões
+### Fase 7 — Exportação (Dias 27–28)
+- `exportCsv.js` com BOM UTF-8 para Excel
+- `ExportButton` com badge de contagem
+- `exportText.js` e `MonthlySummaryModal` para compartilhar
 
-#### Technical
-- Manifest gerado em `dist/manifest.webmanifest`
-- Service Worker em `dist/sw.js`
-- Ícones em `public/icons/`
-- Estratégia workbox para runtimeCaching
+### Fase 6 — Recharts (Dias 24–26)
+- BarChart, PieChart e LineChart migrados para Recharts
+- Tooltips customizados em todos os gráficos
+- `lineChartData` adicionado ao `useFinance`
 
-#### Changed
-- package.json: Adicionada dependência vite-plugin-pwa
+### Fase 5 — Qualidade (Dias 20–23)
+- `storage.js`, `propTypes.js`, `PageHeader`
+- PropTypes em todos os 15+ componentes
+- `MobileNav` e media queries em todas as páginas
+- JSDoc completo em `formatters.js` e `useFinance`
 
----
+### Fase 4 — Telas restantes (Dias 17–19)
+- `SavingsPage`, `ConferencePage`, `SettingsPage`
+- App 100% funcional com 7 telas ativas
 
-### 📚 Documentação
+### Fase 3 — Dashboard (Dias 13–16)
+- `useFinance` com useMemo em todos os cálculos
+- `DashboardPage` com KPIs, gráficos SVG e GoalCard
+- `AnnualPage` com 3 blocos financeiros
 
-#### Added
-- **README.md** v1.0 completo com:
-  - Visão geral e funcionalidades
-  - Tech stack com tabela
-  - Estrutura de projeto detalhada
-  - Como começar (instalação e build)
-  - Recursos por página
-  - Informações de armazenamento
-  - Design & UX
-  - Instruções PWA
-  - Como contribuir
-  - Informações de suporte
-- **CHANGELOG.md** (este arquivo)
-- **LICENSE** MIT completa
+### Fase 2 — CRUD (Dias 6–12)
+- `TransactionForm` com validação
+- `TransactionList` com editar e excluir
+- `ExpensesPage` e `IncomesPage` com filtros encadeados
+- `useLocalStorage` com persistência automática
+- Filtros por forma de pagamento e ordenação
 
-#### Features
-- ✅ Documentação em Markdown
-- ✅ Badges e emojis para visualização
-- ✅ Estrutura clara e navegável
-- ✅ Exemplos de código
-- ✅ Links internos
+### Fase 1 — Setup (Dias 1–5)
+- Vite + React, GitHub, Vercel
+- CSS variables dark mode, Google Fonts
+- Sidebar, roteamento por estado
+- Constantes, formatters, componentes base
 
 ---
 
-## Histórico Anterior
-
-### [Pre-release] — Semanas 1-4
-
-#### Core Features
-- ✅ Setup com Vite + React 18
-- ✅ Router completo (Dashboard, Despesas, Receitas, Anual, Poupança, Configurações, Conferência)
-- ✅ CRUD de transações (criar, editar, deletar)
-- ✅ Separação eletrônico vs espécie (cash)
-- ✅ Cálculos financeiros no useFinance.js
-- ✅ localStorage para persistência
-- ✅ Filtros e ordenação
-- ✅ Cards de estatísticas
-- ✅ Tabela anual consolidada
-- ✅ Design responsivo com CSS Grid
-- ✅ CSS Variables para tema
-- ✅ Mobile navigation (Sidebar + MobileNav)
-- ✅ Modal reutilizável
-- ✅ PropTypes para type-checking
-
----
-
-## Resumo de Commits
-
-```
-01d2df8 - feat: pwa support with manifest, icons and service worker
-08cbb48 - feat: monthly summary text export for sharing
-800318f - feat: export filtered transactions to csv
-8920116 - feat: recharts line chart showing real vs goal accumulated savings
-94921f2 - feat: recharts bar chart with interactive tooltip
-```
-
----
-
-## 🎯 Roadmap Futuro
-
-### Phase 8: Melhorias & Polish
-- [ ] Dark mode toggle
-- [ ] Histórico de transações com busca
-- [ ] Relatórios em PDF
-- [ ] Notificações de alerta de meta
-
-### Phase 9: Avançado
-- [ ] Backend com Supabase ou Firebase
-- [ ] Sincronização entre dispositivos
-- [ ] Compartilhamento de orçamentos familiares
-- [ ] Integração com bancos (API)
-- [ ] Gráficos customizáveis
-
-### Phase 10: Produção
-- [ ] Hospedagem (Vercel, Netlify, etc)
-- [ ] CI/CD com GitHub Actions
-- [ ] Testes automatizados
-- [ ] Monitoramento e analytics
-- [ ] Suporte multi-idioma
-
----
-
-## 🏆 Versão Atual
-
-**v1.0.0** — Lançada em 29 de Abril de 2026
-
-Todas as funcionalidades core implementadas e testadas. Pronto para produção e instalação como PWA!
-
----
-
-## 📌 Notas
-
-- Todos os dados são armazenados **localmente** no navegador (localStorage)
-- A aplicação funciona **100% offline** após primeira visita
-- Não há servidor backend — é um app client-side puro
-- Compatível com navegadores modernos (Chrome, Firefox, Safari, Edge)
-- Otimizado para mobile (touch-friendly, responsivo)
-
----
-
-## ❤️ Agradecimentos
-
-Obrigado por usar FluxoX para controlar suas finanças!
+[2.0.0]: https://github.com/pedrohenriquesilva-dev/FluxoX/releases/tag/v2.0.0
+[1.0.0]: https://github.com/pedrohenriquesilva-dev/FluxoX/releases/tag/v1.0.0

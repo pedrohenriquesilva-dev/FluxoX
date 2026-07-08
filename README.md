@@ -1,292 +1,190 @@
-# FluxoX v1.0 — Controle Financeiro Pessoal
+<div align="center">
 
-<img width="1362" height="707" alt="FluxoX Dashboard" src="https://github.com/user-attachments/assets/f4a9e8d6-a3c8-44ab-a11b-a5954985395b" />
+<img src="public/favicon.svg" width="80" height="80" alt="FluxoX logo" />
 
-## 📱 Sobre o Projeto
+# FluxoX
 
-**FluxoX** é uma aplicação web moderna de controle financeiro pessoal, nascida da necessidade de transformar planilhas manuais em um sistema inteligente, visual e acessível.
+**Controle financeiro pessoal, construído do zero.**
 
-Em vez de fórmulas em Excel, você agora tem:
+[![React](https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react&logoColor=white)](https://reactjs.org/)
+[![Vite](https://img.shields.io/badge/Vite-5-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Recharts](https://img.shields.io/badge/Recharts-3-22c55e?style=flat-square&logoColor=white)](https://recharts.org/)
+[![PWA](https://img.shields.io/badge/PWA-ready-5b8af5?style=flat-square&logo=googlechrome&logoColor=white)](https://web.dev/progressive-web-apps/)
+[![Deploy](https://img.shields.io/badge/Vercel-deploy-000?style=flat-square&logo=vercel&logoColor=white)](https://fluxox.vercel.app)
+[![40 commits](https://img.shields.io/badge/40_commits-diários-22c55e?style=flat-square)](https://github.com/pedrohenriquesilva-dev/FluxoX/commits/main)
 
-✅ **Registros rápidos** de receitas e despesas com categorias  
-✅ **Separação automática** entre pagamentos eletrônicos e dinheiro físico  
-✅ **Gráficos interativos** com Recharts (barras, pizza e linhas)  
-✅ **Meta mensal** com acompanhamento visual de progresso  
-✅ **Visão anual** com tabela consolidada de jan-dez  
-✅ **Exportação para CSV** de dados filtrados  
-✅ **Compartilhamento de resumo** mensal via texto  
-✅ **Instalação mobile** como PWA (Progressive Web App)  
-✅ **Funcionamento offline** com Service Worker  
-✅ **Interface responsiva** para desktop, tablet e celular  
+<br/>
 
----
+[**🚀 Acessar o app →**](https://fluxox.vercel.app)&nbsp;&nbsp;·&nbsp;&nbsp;[Ver commits](https://github.com/pedrohenriquesilva-dev/FluxoX/commits/main)&nbsp;&nbsp;·&nbsp;&nbsp;[Reportar bug](https://github.com/pedrohenriquesilva-dev/FluxoX/issues)
 
-## 🎯 Funcionalidades Principais
-
-### 📊 Dashboard
-- **Visão consolidada** de receitas, despesas, economia real e saldo do mês
-- **4 cards de métricas** com tendências
-- **2 gráficos de pizza** comparando eletrônico vs espécie
-- **Gráfico de barras** mensal (Entradas vs Saídas)
-- **Gráfico de linha** mostrando acumulado vs meta desejada
-- **Tabela anual** com todos os meses e saldo corrente
-- **Botão de compartilhamento** para gerar resumo textual
-
-### 💰 Despesas & Receitas
-- **Formulário CRUD completo** (criar, editar, deletar)
-- **Filtros** por forma de pagamento
-- **Ordenação** por valor (crescente/decrescente)
-- **Stats em tempo real** (total, média)
-- **Exportação CSV** dos dados filtrados
-- **Campos**: data, descrição, categoria, valor, método
-
-### 📅 Visão Anual
-- **Tabela estratégica** de janeiro a dezembro
-- **Consolidado anual** (receitas, despesas, saldo)
-- **Comparação com meta mensal**
-- **Saldo acumulado** (running balance)
-- **Exportação do resumo anual**
-
-### ⚙️ Configurações
-- Gerenciar categorias de despesas
-- Gerenciar métodos de pagamento
-- Atualizar meta mensal desejada
-
-### 🏦 Poupança (Placeholder)
-- Interface pronta para rastrear contas e saldos guardados
-- Estrutura para conferência teórico vs real
-
-### 📱 PWA & Offline
-- Instalável no celular (iOS e Android)
-- Funciona totalmente offline
-- Sincronização automática ao voltar online
-- Cache de assets (JS, CSS, HTML, fontes)
+</div>
 
 ---
 
-## 🛠️ Tech Stack
+## O que é o FluxoX?
 
-| Layer | Tecnologia |
-|-------|-----------|
-| **Frontend** | React 18 + JSX |
-| **Build** | Vite 5 |
-| **Styling** | CSS Grid + CSS Variables |
-| **Charts** | Recharts 2.14 |
-| **State** | React Hooks (useState, useMemo, useLocalStorage) |
-| **PWA** | Vite Plugin PWA |
-| **Type Checking** | PropTypes |
-| **Storage** | localStorage (persistência) |
+Uma alternativa ao controle financeiro em planilha. Em vez de fórmulas que quebram e abas difíceis de navegar, o FluxoX é uma aplicação web completa que separa automaticamente gastos eletrônicos de dinheiro físico, calcula sua economia real e mostra se você está no caminho certo em relação à sua meta mensal.
+
+**Desenvolvido em 40 dias consecutivos**, com um commit por dia documentando cada etapa da evolução — do setup inicial até o PWA instalável.
 
 ---
 
-## 📂 Estrutura do Projeto
+## Screenshots
+
+| Dashboard | Despesas | Relatórios |
+|:-:|:-:|:-:|
+| ![Dashboard](docs/screenshots/dashboard.png) | ![Despesas](docs/screenshots/expenses.png) | ![Relatórios](docs/screenshots/reports.png) |
+
+| Estatísticas | Conferência | Premissas |
+|:-:|:-:|:-:|
+| ![Estatísticas](docs/screenshots/stats.png) | ![Conferência](docs/screenshots/conference.png) | ![Premissas](docs/screenshots/settings.png) |
+
+---
+
+## Funcionalidades
 
 ```
-fluxox/
-├── src/
-│   ├── components/
-│   │   ├── transactions/
-│   │   │   ├── TransactionForm.jsx
-│   │   │   └── TransactionList.jsx
-│   │   └── ui/
-│   │       ├── BarChart.jsx          (Recharts com tooltip)
-│   │       ├── PieChart.jsx          (Recharts donut interativo)
-│   │       ├── LineChart.jsx         (Acumulado vs meta)
-│   │       ├── AccumulatedTable.jsx
-│   │       ├── StatCard.jsx
-│   │       ├── PageHeader.jsx
-│   │       ├── Sidebar.jsx
-│   │       ├── MobileNav.jsx
-│   │       ├── Modal.jsx
-│   │       ├── Field.jsx
-│   │       ├── ExportButton.jsx
-│   │       ├── InstallBanner.jsx
-│   │       ├── MonthlySummaryModal.jsx
-│   │       └── Layout.jsx
-│   ├── pages/
-│   │   ├── DashboardPage.jsx
-│   │   ├── ExpensesPage.jsx
-│   │   ├── IncomesPage.jsx
-│   │   ├── AnnualPage.jsx
-│   │   ├── SavingsPage.jsx
-│   │   ├── SettingsPage.jsx
-│   │   ├── ConferencePage.jsx
-│   │   └── Placeholder.jsx
-│   ├── hooks/
-│   │   ├── useFinance.js          (Central de cálculos)
-│   │   ├── useLocalStorage.js     (Persistência)
-│   │   └── usePWAInstall.js       (Instalação PWA)
-│   ├── utils/
-│   │   ├── constants.js
-│   │   ├── formatters.js
-│   │   ├── storage.js
-│   │   ├── propTypes.js
-│   │   ├── exportCsv.js
-│   │   └── exportText.js
-│   ├── App.jsx                   (Router principal)
-│   ├── main.jsx                  (Entry point)
-│   └── index.css                 (CSS global + variáveis)
-├── public/
-│   ├── favicon.svg
-│   └── icons/
-│       ├── icon-192.png          (PWA icon)
-│       └── icon-512.png          (PWA icon)
-├── index.html
-├── vite.config.js                (PWA plugin config)
-├── package.json
-├── README.md
-├── CHANGELOG.md
-├── LICENSE
-└── .gitignore
+✅ Despesas e receitas com CRUD completo
+✅ Separação automática eletrônico vs espécie
+✅ Meta mensal com barra de progresso
+✅ Resumo anual em 3 blocos (eletrônico, espécie, planejamento)
+✅ Relatórios por categoria e forma de pagamento
+✅ Estatísticas com recordes e hábitos do ano
+✅ Conferência: saldo calculado vs saldo real
+✅ Exportação para CSV (despesas, receitas, resumo anual)
+✅ Resumo mensal em texto para compartilhar no WhatsApp
+✅ Busca global com Ctrl+K e highlight de texto
+✅ Toast notifications em todas as ações
+✅ Tema claro e escuro (detecta o sistema automaticamente)
+✅ Skeleton loading no Dashboard
+✅ Animações de entrada com IntersectionObserver
+✅ PWA instalável no celular, funciona offline
+✅ Responsivo — sidebar no desktop, nav inferior no mobile
 ```
 
 ---
 
-## 🚀 Como Começar
+## Lógica financeira
 
-### Pré-requisitos
-- **Node.js** 18.0.0 ou superior
-- **npm** 9.0.0 ou superior
+| Conceito | Cálculo |
+|---|---|
+| **Eletrônico** | Qualquer forma que não contenha "dinheiro" ou "físico" |
+| **Espécie** | Forma = "Dinheiro Físico" |
+| **Economia Real** | Entrada Eletrônica − Saída Eletrônica |
+| **Acumulado** | Soma progressiva da economia mês a mês |
+| **Conferência** | Total Guardado − Acumulado Calculado |
+| **Taxa de Economia** | Economia ÷ Total Recebido × 100 |
 
-### Instalação
+---
+
+## Stack
+
+| | Tecnologia | Por quê |
+|---|---|---|
+| ⚛️ | React 18 | Framework principal — hooks e componentes funcionais |
+| ⚡ | Vite 5 | Build ultrarrápido e HMR instantâneo |
+| 📊 | Recharts 3 | Gráficos de barra, pizza e linha com tooltips interativos |
+| 📦 | vite-plugin-pwa | Service worker e manifest gerados automaticamente |
+| 🎨 | CSS puro | Design system com variáveis — sem Tailwind, sem libs de UI |
+| 💾 | localStorage | Dados 100% locais, sem servidor, sem conta |
+| 🚀 | Vercel | Deploy contínuo a cada push na main |
+
+> **Nenhuma biblioteca de componentes foi usada.** Os 24 componentes de interface foram construídos do zero para demonstrar domínio real de React e CSS.
+
+---
+
+## Estrutura
+
+```
+src/
+├── components/ui/      # 24 componentes (Sidebar, Charts, Modal, Toast...)
+├── components/transactions/ # TransactionForm, TransactionList
+├── contexts/           # ToastContext — notificações globais
+├── hooks/              # 7 hooks (useFinance, useTheme, useGlobalSearch...)
+├── pages/              # 9 telas (Dashboard, Despesas, Relatórios, Stats...)
+└── utils/              # formatters, exportCsv, exportText, storage
+```
+
+---
+
+## Rodando localmente
 
 ```bash
-# 1. Clone o repositório
 git clone https://github.com/pedrohenriquesilva-dev/FluxoX.git
-
-# 2. Entre na pasta
 cd FluxoX
-
-# 3. Instale as dependências
 npm install
-
-# 4. Inicie o servidor de desenvolvimento
-npm run dev
+npm run dev        # http://localhost:5173
 ```
 
-Acesse: **http://localhost:5173**
-
-### Build para Produção
-
+Para testar o PWA:
 ```bash
-# Cria a build otimizada
 npm run build
-
-# Visualiza a build localmente
-npm run preview
+npm run preview    # http://localhost:4173
 ```
 
 ---
 
-## 📊 Recursos por Página
+## Os 40 commits
 
-### **Dashboard** 📈
-- 4 cards com métricas totais
-- Gráficos de pizza (despesas e receitas)
-- Gráfico de barras (entradas vs saídas por mês)
-- Gráfico de linha (acumulado vs meta)
-- Tabela anual com saldo acumulado
-- Botão para compartilhar resumo
+O projeto foi desenvolvido com **um commit por dia** durante 40 dias consecutivos. Cada commit representa uma entrega real e isolada — não há commits de "correção do commit anterior" ou mensagens genéricas.
 
-### **Despesas** 💸
-- Formulário para cadastrar nova despesa
-- Lista com filtros e ordenação
-- Edição e exclusão inline
-- Export CSV dos dados filtrados
+<details>
+<summary>Ver todos os 40 commits</summary>
 
-### **Receitas** 💰
-- Formulário para registrar nova receita
-- Lista com filtros por método
-- CRUD completo
-- Estatísticas (total, média)
-- Export CSV
+| Dia | Mensagem |
+|-----|----------|
+| 1 | `feat: project setup with vite + react, vercel deploy configured` |
+| 2 | `chore: folder structure, global styles and css variables` |
+| 3 | `feat: sidebar navigation and state-based routing` |
+| 4 | `chore: constants file and utility functions` |
+| 5 | `feat: reusable base components (icon, field, modal, statcard)` |
+| 6 | `feat: transaction form component with validation` |
+| 7 | `feat: transaction list component with edit and delete` |
+| 8 | `feat: expenses page with filters, search and totals` |
+| 9 | `feat: incomes page with filters, search and totals` |
+| 10 | `feat: useLocalStorage hook, persist all data to browser storage` |
+| 11 | `feat: advanced filters with method, sort and clear button` |
+| 12 | `style: visual polish, hover states and responsive improvements` |
+| 13 | `feat: useFinance hook with monthly and accumulated calculations` |
+| 14 | `feat: barchart, piechart and accumulated table components` |
+| 15 | `feat: dashboard page with kpis, charts and goal tracking` |
+| 16 | `feat: annual summary page with three financial blocks` |
+| 17 | `feat: savings page with location tracking and comparison` |
+| 18 | `feat: conference page with monthly reconciliation` |
+| 19 | `feat: settings page with editable lists and monthly goal` |
+| 20 | `refactor: centralize storage keys, add proptypes and pageheader` |
+| 21 | `refactor: add proptypes to all components and apply pageheader` |
+| 22 | `style: mobile responsiveness with bottom nav and media queries` |
+| 23 | `refactor: cleanup dead code, add jsdoc and standardize naming` |
+| 24 | `feat: recharts bar chart with interactive tooltip` |
+| 25 | `feat: recharts pie chart with legend and hover animation` |
+| 26 | `feat: recharts line chart showing real vs goal accumulated savings` |
+| 27 | `feat: export filtered transactions to csv` |
+| 28 | `feat: monthly summary text export for sharing` |
+| 29 | `feat: pwa support with manifest, icons and service worker` |
+| 30 | `docs: final readme with screenshots and v1.0 release` |
+| 31 | `feat: entrance animations with intersection observer` |
+| 32 | `feat: light and dark theme toggle with system preference` |
+| 33 | `feat: period filter and expandable rows on conference page` |
+| 34 | `feat: reports page with category and payment method analytics` |
+| 35 | `feat: skeleton loading state for dashboard with shimmer animation` |
+| 36 | `feat: toast notifications for user actions across all pages` |
+| 37 | `feat: global search across expenses and incomes with keyboard shortcut` |
+| 38 | `feat: stats page with yearly records and financial habits` |
+| 39 | `style: polish, accessibility focus styles, scroll to top and empty state` |
+| 40 | `docs: readme v2.0, changelog and final release` |
 
-### **Visão Anual** 📅
-- Tabela consolidada Jan-Dez
-- Colunas: Receitas, Despesas, Saldo, Acumulado
-- Comparação com meta mensal
-- Export do resumo anual
-
-### **Poupança** 🏦
-- Interface pronta (placeholder)
-- Estrutura para rastrear contas
-
-### **Configurações** ⚙️
-- Gerenciar categorias de despesa
-- Gerenciar formas de pagamento
-- Atualizar meta mensal
-
----
-
-## 💾 Armazenamento de Dados
-
-Todos os dados são salvos **localmente no navegador** usando `localStorage`. Não há servidor backend.
-
-**Estrutura de dados:**
-```javascript
-{
-  expenses: [{ id, date, description, category, value, method, type }],
-  incomes: [{ id, date, description, category, value, method, type }],
-  monthlyGoal: 5000,
-  savingLocations: [{ name, electronic: 0, cash: 0 }]
-}
-```
+</details>
 
 ---
 
-## 🎨 Design & UX
+## Autor
 
-- **CSS Grid** para layouts responsivos
-- **CSS Variables** para temas e cores
-- **Dark Mode Ready** (variáveis preparadas)
-- **Mobile First** approach
-- **Breakpoints**: 1024px, 768px, 480px, 360px
-- **Ícones SVG** customizáveis
-- **Transições suaves** (0.2s ease)
+**Pedro Henrique Silva**
+[github.com/pedrohenriquesilva-dev](https://github.com/pedrohenriquesilva-dev)
 
 ---
 
-## 📱 PWA (Progressive Web App)
-
-FluxoX pode ser instalado como app nativo:
-
-1. **No Chrome/Edge**: Menu → Instalar FluxoX
-2. **No Safari (iOS)**: Compartilhar → Adicionar à Tela de Início
-3. **Funciona offline** com Service Worker
-4. **Sincronização** automática de dados
-
----
-
-## 🤝 Contribuindo
-
-Sugestões, bug reports e PRs são bem-vindos!
-
-1. Faça um Fork
-2. Crie uma branch (`git checkout -b feature/sua-feature`)
-3. Commit suas mudanças (`git commit -m 'feat: descrição'`)
-4. Push para a branch (`git push origin feature/sua-feature`)
-5. Abra um Pull Request
-
----
-
-## 📝 Licença
-
-Este projeto está licenciado sob a **MIT License** — veja [LICENSE](./LICENSE) para detalhes.
-
----
-
-## 👨‍💻 Autor
-
-**Pedro Henrique Silva**  
-GitHub: [@pedrohenriquesilva-dev](https://github.com/pedrohenriquesilva-dev)
-
----
-
-## 📞 Suporte
-
-Encontrou um bug ou tem uma sugestão? Abra uma [issue](https://github.com/pedrohenriquesilva-dev/FluxoX/issues).
-
----
-
-**v1.0** — Lançado em Abril 2026  
-Feito com ❤️ para controlar suas finanças de verdade.
+<div align="center">
+  <sub>Feito com 💙 em 40 dias · <a href="https://fluxox.vercel.app">fluxox.vercel.app</a></sub>
+</div>
