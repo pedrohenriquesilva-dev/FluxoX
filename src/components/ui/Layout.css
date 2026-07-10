@@ -18,11 +18,20 @@
 
 .layout__search-header {
   flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   padding: 0.75rem 1.6rem;
   border-bottom: 1px solid var(--border);
   background: var(--card);
   backdrop-filter: blur(8px);
   z-index: 50;
+}
+
+/* Busca ocupa todo o espaço disponível */
+.layout__search-header > :first-child {
+  flex: 1;
+  min-width: 0;
 }
 
 .layout__main {
@@ -54,5 +63,18 @@
   .layout__main {
     max-width: 100%;
     padding: 1rem 1rem calc(5.2rem + env(safe-area-inset-bottom));
+  }
+}
+
+/* Botão de tema — só aparece no mobile */
+.layout__theme-mobile {
+  display: none;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .layout__theme-mobile {
+    display: flex;
+    align-items: center;
   }
 }

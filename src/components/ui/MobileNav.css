@@ -1,50 +1,64 @@
+/* ─── MobileNav ───────────────────────────────────────────────── */
 .mobile-nav {
   display: none;
 }
 
 @media (max-width: 900px) {
   .mobile-nav {
+    display: flex;
     position: fixed;
+    bottom: 0;
     left: 0;
     right: 0;
-    bottom: 0;
-    z-index: 30;
-    display: grid;
-    grid-template-columns: repeat(7, minmax(0, 1fr));
-    gap: 0.25rem;
-    background: color-mix(in srgb, var(--card) 92%, #000 8%);
+    background: var(--card);
     border-top: 1px solid var(--border);
-    padding: 0.35rem 0.35rem calc(0.35rem + env(safe-area-inset-bottom));
-    backdrop-filter: blur(10px);
+    z-index: 100;
+    padding: 0.25rem 0;
+    padding-bottom: env(safe-area-inset-bottom, 0.25rem);
+    overflow-x: auto;
+    overflow-y: hidden;
   }
+}
 
-  .mobile-nav__item {
-    border: 1px solid transparent;
-    background: transparent;
-    color: var(--muted);
-    border-radius: var(--radius-sm);
-    display: grid;
-    place-items: center;
-    gap: 0.1rem;
-    padding: 0.32rem 0.2rem;
-    font: inherit;
-    cursor: pointer;
-  }
+/* ── Item ────────────────────────────────────────────────────── */
+.mobile-nav__item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+  padding: 0.35rem 0.1rem;
+  min-width: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  font-family: var(--font);
+  transition: color var(--transition);
+  -webkit-tap-highlight-color: transparent;
+}
 
-  .mobile-nav__item--active {
-    color: var(--accent);
-    border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
-    background: color-mix(in srgb, var(--accent) 14%, transparent);
-  }
+.mobile-nav__item:hover,
+.mobile-nav__item--active {
+  color: var(--accent);
+}
 
-  .mobile-nav__icon {
-    font-size: 0.92rem;
-    line-height: 1;
-  }
+.mobile-nav__icon {
+  font-size: 1.2rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
 
-  .mobile-nav__label {
-    font-size: 0.62rem;
-    line-height: 1;
-    white-space: nowrap;
-  }
+.mobile-nav__label {
+  font-size: 0.55rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  padding: 0 2px;
 }

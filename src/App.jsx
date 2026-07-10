@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import Layout from "./components/ui/Layout.jsx";
 import useFinance from "./hooks/useFinance.js";
 import useLocalStorage from "./hooks/useLocalStorage.js";
@@ -9,7 +10,9 @@ import ExpensesPage from "./pages/ExpensesPage.jsx";
 import IncomesPage from "./pages/IncomesPage.jsx";
 import ReportsPage from "./pages/ReportsPage.jsx";
 import SettingsPage from "./pages/SettingsPage.jsx";
-import SavingsPage from "./pages/SavingsPage.jsx";import StatsPage from "./pages/StatsPage.jsx";import Placeholder from "./pages/Placeholder.jsx";
+import SavingsPage from "./pages/SavingsPage.jsx";
+import StatsPage from "./pages/StatsPage.jsx";
+import Placeholder from "./pages/Placeholder.jsx";
 import { STORAGE_KEYS } from "./utils/storage.js";
 
 function App() {
@@ -36,6 +39,28 @@ function App() {
     incomes: incomeTransactions,
     monthlyGoal
   });
+
+  // ── Scroll para o topo ao trocar de página ────────────────────
+  // Tenta todos os elementos que podem estar com scroll ativo
+  useEffect(() => {
+    // Estratégia 1: elemento com classe layout__main
+    const main = document.querySelector('.layout__main')
+    if (main) {
+      main.scrollTop = 0
+    }
+
+    // Estratégia 2: body e html (caso o scroll seja da página inteira)
+    window.scrollTo(0, 0)
+    document.body.scrollTop = 0
+    document.documentElement.scrollTop = 0
+
+    // Estratégia 3: qualquer elemento com scrollTop > 0
+    document.querySelectorAll('*').forEach(el => {
+      if (el.scrollTop > 0) {
+        el.scrollTop = 0
+      }
+    })
+  }, [page])
 
   return (
     <Layout 
