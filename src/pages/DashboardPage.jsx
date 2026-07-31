@@ -28,7 +28,7 @@ export default function DashboardPage({ finance }) {
     <section className="dashboard-page">
       <PageHeader
         title="Dashboard"
-        subtitle="Visao consolidada das financas com foco em saldo, meta e acumulado anual."
+        subtitle="Visão consolidada das finanças com foco em saldo, meta e acumulado anual."
         rightSlot={(
           <div className="dashboard-page__header-actions">
             <button
@@ -39,7 +39,7 @@ export default function DashboardPage({ finance }) {
               📤 Compartilhar resumo
             </button>
             <p className={`dashboard-page__goal ${finance.goal.reached ? "text-success" : "text-warning"}`}>
-              Meta do mes: {fmt(finance.monthly.savings)} / {fmt(finance.goal.value)}
+              Meta do mês: {fmt(finance.monthly.savings)} / {fmt(finance.goal.value)}
             </p>
           </div>
         )}
@@ -49,7 +49,7 @@ export default function DashboardPage({ finance }) {
         <StatCard title="Receitas (total)" value={fmt(finance.totals.incomes)} trend={6.1} icon="incomes" />
         <StatCard title="Despesas (total)" value={fmt(finance.totals.expenses)} trend={-3.2} icon="expenses" />
         <StatCard title="Economia real" value={fmt(finance.totals.realSavings)} trend={4.8} icon="savings" />
-        <StatCard title="Saldo do mes" value={fmt(finance.monthly.savings)} trend={finance.goal.reached ? 8.4 : -1.7} icon="annual" />
+        <StatCard title="Saldo do mês" value={fmt(finance.monthly.savings)} trend={finance.goal.reached ? 8.4 : -1.7} icon="annual" />
       </div>
 
       <div className="dashboard-page__charts">

@@ -54,11 +54,11 @@ export default function SavingsPage({
     <section className="savings-page">
       <PageHeader
         title="Savings"
-        subtitle="Informe quanto voce possui em cada local e compare com o acumulado calculado."
+        subtitle="Informe quanto você possui em cada local e compare com o acumulado calculado."
       />
 
       <label className="savings-page__month" htmlFor="savings-month">
-        <span>Mes de referencia</span>
+        <span>Mês de referência</span>
         <select
           id="savings-month"
           value={monthIndex}
@@ -98,7 +98,7 @@ export default function SavingsPage({
           <strong>{fmt(calculatedAccumulated)}</strong>
         </article>
         <article className="savings-page__card">
-          <span className="text-muted">Diferenca</span>
+          <span className="text-muted">Diferença</span>
           <strong className={difference >= 0 ? "text-success" : "text-danger"}>{fmt(difference)}</strong>
         </article>
       </div>

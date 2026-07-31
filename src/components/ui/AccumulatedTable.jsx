@@ -14,7 +14,7 @@ export default function AccumulatedTable({ rows = [] }) {
         <table>
           <thead>
             <tr>
-              <th>Mes</th>
+              <th>Mês</th>
               <th>Receitas</th>
               <th>Despesas</th>
               <th>Saldo</th>

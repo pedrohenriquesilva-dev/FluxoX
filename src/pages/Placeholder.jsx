@@ -4,7 +4,7 @@ const PAGE_INFO = {
   dashboard: {
     icon: "\u{1F3E0}",
     title: "Dashboard",
-    sub: "Visao geral das suas financas pessoais."
+    sub: "Visão geral das suas finanças pessoais."
   },
   expenses: {
     icon: "\u{1F4B8}",

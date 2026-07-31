@@ -56,7 +56,7 @@ export default function ExpensesPage({
     <section className="expenses-page">
       <PageHeader
         title="Despesas"
-        subtitle="Cadastre, edite e exclua despesas em um fluxo unico de CRUD."
+        subtitle="Cadastre, edite e exclua despesas em um fluxo único de CRUD."
         rightSlot={(
           <ExportButton
             onExport={() => {

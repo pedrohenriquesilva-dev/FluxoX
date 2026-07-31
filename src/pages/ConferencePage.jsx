@@ -59,8 +59,8 @@ export default function ConferencePage({ finance, savingsByMonth = {}, expenses 
   return (
     <section className="conference-page">
       <PageHeader
-        title="Conferencia"
-        subtitle="Comparacao mes a mes entre acumulado calculado e guardado real."
+        title="Conferência"
+        subtitle="Comparação mês a mês entre acumulado calculado e guardado real."
       />
 
       <PeriodFilter onPeriodChange={handlePeriodChange} currentPeriod={period} />
@@ -75,7 +75,7 @@ export default function ConferencePage({ finance, savingsByMonth = {}, expenses 
           <strong className="text-success">{matchedMonths}</strong>
         </article>
         <article className="conference-page__stat">
-          <span className="text-muted">Diferenca acumulada</span>
+          <span className="text-muted">Diferença acumulada</span>
           <strong className={totalDifference >= 0 ? "text-success" : "text-danger"}>
             {fmt(totalDifference)}
           </strong>
@@ -87,10 +87,10 @@ export default function ConferencePage({ finance, savingsByMonth = {}, expenses 
           <thead>
             <tr>
               <th></th>
-              <th>Mes</th>
+              <th>Mês</th>
               <th>Acumulado calculado</th>
               <th>Guardado real</th>
-              <th>Diferenca</th>
+              <th>Diferença</th>
               <th>Status</th>
             </tr>
           </thead>

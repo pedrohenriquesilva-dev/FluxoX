@@ -94,7 +94,7 @@ export default function TransactionForm({
       <header className="transaction-form__header">
         <h2 className="transaction-form__title">{copy.title}</h2>
         <p className="transaction-form__hint text-muted">
-          Componente unico para despesas e receitas.
+          Componente único para despesas e receitas.
         </p>
       </header>
 
@@ -133,7 +133,7 @@ export default function TransactionForm({
         </label>
 
         <label className="transaction-form__select-wrap" htmlFor="method">
-          <span className="field__label">Metodo de pagamento</span>
+          <span className="field__label">Método de pagamento</span>
           <select
             id="method"
             className="transaction-form__select"

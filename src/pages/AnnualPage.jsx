@@ -30,8 +30,8 @@ export default function AnnualPage({ finance }) {
   return (
     <section className="annual-page">
       <PageHeader
-        title="Visao Anual"
-        subtitle="Tabela estrategica de janeiro a dezembro com consolidado financeiro completo."
+        title="Visão Anual"
+        subtitle="Tabela estratégica de janeiro a dezembro com consolidado financeiro completo."
         rightSlot={(
           <ExportButton
             onExport={() => exportAnnualToCSV(tableRows)}
@@ -61,13 +61,13 @@ export default function AnnualPage({ finance }) {
         <table className="annual-page__table">
           <thead>
             <tr>
-              <th>Mes</th>
+              <th>Mês</th>
               <th>Receitas</th>
               <th>Despesas</th>
               <th>Saldo</th>
               <th>Acumulado</th>
               <th>Meta</th>
-              <th>Diferenca</th>
+              <th>Diferença</th>
             </tr>
           </thead>
           <tbody>
