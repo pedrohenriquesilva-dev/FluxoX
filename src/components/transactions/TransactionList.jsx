@@ -8,12 +8,12 @@ export default function TransactionList({ items = [], onEdit, onDelete }) {
   return (
     <section className="transaction-list">
       <header className="transaction-list__header">
-        <h2 className="transaction-list__title">Transacoes</h2>
+        <h2 className="transaction-list__title">Transações</h2>
         <span className="transaction-list__count">{items.length} itens</span>
       </header>
 
       {items.length === 0 ? (
-        <p className="transaction-list__empty text-muted">Nenhuma transacao cadastrada.</p>
+        <p className="transaction-list__empty text-muted">Nenhuma transação cadastrada.</p>
       ) : (
         <ul className="transaction-list__items">
           {items.map((item) => (

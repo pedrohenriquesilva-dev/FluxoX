@@ -54,12 +54,12 @@ export default function DashboardPage({ finance }) {
 
       <div className="dashboard-page__charts">
         <PieChart
-          title="Despesas: Eletronico vs Especie"
+          title="Despesas: Eletrônico vs Espécie"
           electronic={finance.byMethod.expenses.electronic}
           cash={finance.byMethod.expenses.cash}
         />
         <PieChart
-          title="Receitas: Eletronico vs Especie"
+          title="Receitas: Eletrônico vs Espécie"
           electronic={finance.byMethod.incomes.electronic}
           cash={finance.byMethod.incomes.cash}
         />

@@ -26,7 +26,7 @@ const CustomTooltip = ({ active, payload }) => {
   return null;
 };
 
-export default function PieChart({ electronic = 0, cash = 0, title = "Composicao" }) {
+export default function PieChart({ electronic = 0, cash = 0, title = "Composição" }) {
   const [activeIndex, setActiveIndex] = useState(null);
 
   const numElectronic = Number(electronic);

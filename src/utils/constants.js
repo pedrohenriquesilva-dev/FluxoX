@@ -46,8 +46,8 @@ export const PAGE_CONFIG = [
   { id: PAGE_IDS.INCOMES, label: "Receitas", icon: "\u{1F4B0}" },
   { id: PAGE_IDS.ANNUAL, label: "Anual", icon: "\u{1F4C5}" },
   { id: PAGE_IDS.SAVINGS, label: "Reserva", icon: "\u{1F4B5}" },
-  { id: PAGE_IDS.CONFERENCE, label: "Conferencia", icon: "\u{1F4C8}" },
-  { id: PAGE_IDS.SETTINGS, label: "Configuracoes", icon: "\u2699" }
+  { id: PAGE_IDS.CONFERENCE, label: "Confer\u00eancia", icon: "\u{1F4C8}" },
+  { id: PAGE_IDS.SETTINGS, label: "Configura\u00e7\u00f5es", icon: "\u2699" }
 ];
 
 export const DATE_FORMATS = {
@@ -69,5 +69,5 @@ export const DEFAULT_TRANSACTION = {
 export const DEFAULT_SETTINGS = {
   expenseCategories: CATEGORIES,
   paymentMethods: PAYMENT_METHODS,
-  savingLocations: ["carteira", "conta bancaria", "reserva", "investimentos"]
+  savingLocations: ["carteira", "conta bancária", "reserva", "investimentos"]
 };

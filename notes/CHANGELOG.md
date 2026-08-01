@@ -236,7 +236,7 @@ Todas as mudanças notáveis neste projeto são documentadas neste arquivo.
 
 ## 🏆 Versão Atual
 
-**v1.0.0** — Lançada em 29 de Abril de 2026
+**v1.0.0** — Lançada em 29 de abril de 2026
 
 Todas as funcionalidades core implementadas e testadas. Pronto para produção e instalação como PWA!
 

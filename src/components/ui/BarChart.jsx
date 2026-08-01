@@ -39,7 +39,7 @@ export default function BarChart({ data = [] }) {
   return (
     <section className="bar-chart">
       <header className="bar-chart__header">
-        <h3 className="bar-chart__title">Entradas vs Saidas (Ano)</h3>
+        <h3 className="bar-chart__title">Entradas vs Saídas (Ano)</h3>
       </header>
 
       <div className="bar-chart__container">

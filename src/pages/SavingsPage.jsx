@@ -9,7 +9,7 @@ import "./SavingsPage.css";
 const MONTHS = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
 const LOCATIONS = [
   { key: "wallet", label: "Carteira" },
-  { key: "bank", label: "Conta bancaria" },
+  { key: "bank", label: "Conta bancária" },
   { key: "reserve", label: "Reserva" },
   { key: "investments", label: "Investimentos" }
 ];

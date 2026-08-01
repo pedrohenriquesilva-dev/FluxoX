@@ -142,7 +142,7 @@ export default function IncomesPage({
       <div className="incomes-page__stats">
         <StatCard title="Total recebido" value={fmt(totalValue)} trend={visibleTransactions.length ? 6.3 : 0} icon="incomes" />
         <StatCard title="Quantidade" value={String(visibleTransactions.length)} trend={visibleTransactions.length ? 4.7 : 0} icon="conference" />
-        <StatCard title="Ticket medio" value={fmt(averageValue)} trend={visibleTransactions.length ? 2.4 : 0} icon="annual" />
+        <StatCard title="Ticket médio" value={fmt(averageValue)} trend={visibleTransactions.length ? 2.4 : 0} icon="annual" />
       </div>
 
       <TransactionList

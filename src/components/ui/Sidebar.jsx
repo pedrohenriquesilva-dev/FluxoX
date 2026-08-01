@@ -6,11 +6,11 @@ const NAV_ITEMS = [
   { id: "expenses", icon: "\u{1F4B8}", label: "Despesas" },
   { id: "incomes", icon: "\u{1F4B0}", label: "Receitas" },
   { id: "annual", icon: "\u{1F4C5}", label: "Anual" },
-  { id: "savings", icon: "\u{1F4B5}", label: "Poupanca" },
-  { id: "conference", icon: "\u{1F4C8}", label: "Conferencia" },
-  { id: "reports", icon: "\u{1F4CA}", label: "Relatorios" },
-  { id: "stats", icon: "\u{1F4C8}", label: "★ Estatisticas" },
-  { id: "settings", icon: "\u2699", label: "Configuracoes" }
+  { id: "savings", icon: "\u{1F4B5}", label: "Poupança" },
+  { id: "conference", icon: "\u{1F4C8}", label: "Conferência" },
+  { id: "reports", icon: "\u{1F4CA}", label: "Relatórios" },
+  { id: "stats", icon: "\u{1F4C8}", label: "★ Estatísticas" },
+  { id: "settings", icon: "\u2699", label: "Configura\u00e7\u00f5es" }
 ];
 
 export default function Sidebar({ currentPage, onNavigate, isDark, onToggleTheme }) {
@@ -29,7 +29,7 @@ export default function Sidebar({ currentPage, onNavigate, isDark, onToggleTheme
         <ThemeToggle isDark={isDark} onToggle={onToggleTheme} />
       </div>
 
-      <nav className="sidebar__nav" aria-label="Navegacao principal">
+      <nav className="sidebar__nav" aria-label="Navegação principal">
         {NAV_ITEMS.map((item) => (
           <button
             key={item.id}

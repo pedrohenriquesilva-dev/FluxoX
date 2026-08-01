@@ -7,13 +7,13 @@ const NAV_ITEMS = [
   { id: "incomes", icon: "\u{1F4B0}", label: "Receitas" },
   { id: "annual", icon: "\u{1F4C5}", label: "Anual" },
   { id: "savings", icon: "\u{1F4B5}", label: "Reserva" },
-  { id: "conference", icon: "\u{1F4C8}", label: "Conferencia" },
+  { id: "conference", icon: "\u{1F4C8}", label: "Conferência" },
   { id: "settings", icon: "\u2699", label: "Ajustes" }
 ];
 
 export default function MobileNav({ currentPage, onNavigate }) {
   return (
-    <nav className="mobile-nav" aria-label="Navegacao mobile">
+    <nav className="mobile-nav" aria-label="Navegação mobile">
       {NAV_ITEMS.map((item) => (
         <button
           key={item.id}

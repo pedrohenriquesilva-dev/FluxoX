@@ -9,7 +9,7 @@ import "./SettingsPage.css";
 const DEFAULT_SETTINGS = {
   expenseCategories: CATEGORIES,
   paymentMethods: PAYMENT_METHODS,
-  savingLocations: ["carteira", "conta bancaria", "reserva", "investimentos"]
+  savingLocations: ["carteira", "conta bancária", "reserva", "investimentos"]
 };
 
 function normalizeText(value) {
@@ -96,7 +96,7 @@ export default function SettingsPage({
   return (
     <section className="settings-page">
       <PageHeader
-        title="Configuracoes"
+        title="Configurações"
         subtitle="Ajuste categorias, formas de pagamento, locais de reserva e meta mensal."
       />
 

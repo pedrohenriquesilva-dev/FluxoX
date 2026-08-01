@@ -9,7 +9,7 @@ const PAGE_INFO = {
   expenses: {
     icon: "\u{1F4B8}",
     title: "Despesas",
-    sub: "Acompanhe e organize todas as suas saidas."
+    sub: "Acompanhe e organize todas as suas saídas."
   },
   incomes: {
     icon: "\u{1F4B0}",
@@ -23,17 +23,17 @@ const PAGE_INFO = {
   },
   savings: {
     icon: "\u{1F4B5}",
-    title: "Poupanca",
+    title: "Poupança",
     sub: "Planeje reservas e objetivos de economia."
   },
   conference: {
     icon: "\u{1F4C8}",
-    title: "Conferencia",
-    sub: "Confira consistencia entre categorias e periodos."
+    title: "Conferência",
+    sub: "Confira consistência entre categorias e períodos."
   },
   settings: {
     icon: "\u2699",
-    title: "Configuracoes",
+    title: "Configurações",
     sub: "Ajustes gerais do aplicativo FluxoX."
   }
 };
@@ -48,7 +48,7 @@ export default function Placeholder({ page }) {
       </div>
       <h1 className="placeholder__title">{info.title}</h1>
       <p className="placeholder__sub text-muted">{info.sub}</p>
-      <span className="placeholder__badge font-mono">em construcao</span>
+      <span className="placeholder__badge font-mono">em construção</span>
     </section>
   );
 }

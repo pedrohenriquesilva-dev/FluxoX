@@ -121,7 +121,7 @@ export default function ExpensesPage({
       <div className="expenses-page__stats">
         <StatCard title="Total gasto" value={fmt(totalValue)} trend={visibleTransactions.length ? -4.1 : 0} icon="expenses" />
         <StatCard title="Quantidade" value={String(visibleTransactions.length)} trend={visibleTransactions.length ? 7.8 : 0} icon="conference" />
-        <StatCard title="Ticket medio" value={fmt(averageValue)} trend={visibleTransactions.length ? -1.2 : 0} icon="annual" />
+        <StatCard title="Ticket médio" value={fmt(averageValue)} trend={visibleTransactions.length ? -1.2 : 0} icon="annual" />
       </div>
 
       <TransactionList

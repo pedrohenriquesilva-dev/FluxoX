@@ -69,7 +69,7 @@ export default function TransactionForm({
 
     const parsedValue = normalizeMoneyInput(form.value);
     if (!form.description.trim() || parsedValue <= 0 || !form.date) {
-      setError("Preencha descricao, valor maior que zero e data.");
+      setError("Preencha descrição, valor maior que zero e data.");
       return;
     }
 
@@ -101,8 +101,8 @@ export default function TransactionForm({
       <div className="transaction-form__grid">
         <Field
           id="description"
-          label="Descricao"
-          placeholder="Ex: supermercado, salario..."
+          label="Descrição"
+          placeholder="Ex: supermercado, salário..."
           value={form.description}
           onChange={(event) => updateField("description", event.target.value)}
         />
@@ -161,7 +161,7 @@ export default function TransactionForm({
       <footer className="transaction-form__footer">
         {isEditing ? (
           <button className="day5__button day5__button--ghost" type="button" onClick={onCancelEdit}>
-            Cancelar edicao
+            Cancelar edição
           </button>
         ) : null}
         <button
@@ -169,7 +169,7 @@ export default function TransactionForm({
           type="submit"
           disabled={!canSubmit}
         >
-          {isEditing ? "Atualizar transacao" : copy.button}
+          {isEditing ? "Atualizar transação" : copy.button}
         </button>
       </footer>
     </form>
