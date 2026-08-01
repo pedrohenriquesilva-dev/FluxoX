@@ -91,7 +91,7 @@ export default function StatsPage({ expenses = [], incomes = [], finance }) {
     <section className="stats-page">
       <PageHeader
         title="★ Estatísticas"
-        subtitle="Seu ano financeiro em números — conquistas, recordes e padrões de consumo."
+        subtitle="Seu ano financeiro em números, conquistas, recordes e padrões de consumo."
       />
 
       {/* Overview Cards */}
