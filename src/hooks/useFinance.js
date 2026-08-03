@@ -96,7 +96,6 @@ export default function useFinance({ expenses = [], incomes = [], monthlyGoal = 
     const goalProgress = goal > 0 ? monthSavings / goal : 0;
     const goalDelta = monthSavings - goal;
 
-    // Calculate accumulated balance for line chart
     let cumulativeBalance = 0;
     const lineChartData = Array.from({ length: 12 }, (_, index) => {
       const monthBalance = monthlyAccumulation[index].balance;

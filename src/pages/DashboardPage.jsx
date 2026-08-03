@@ -15,11 +15,10 @@ import "./DashboardPage.css";
 
 export default function DashboardPage({ finance }) {
   const [showSummaryModal, setShowSummaryModal] = useState(false);
-  const isLoading = useLoading(1200); // 1.2 segundos de loading
+  const isLoading = useLoading(1200);
 
   if (!finance) return null;
 
-  // Mostra skeleton durante loading
   if (isLoading) {
     return <DashboardSkeleton />;
   }
@@ -36,7 +35,7 @@ export default function DashboardPage({ finance }) {
               onClick={() => setShowSummaryModal(true)}
               type="button"
             >
-              📤 Compartilhar resumo
+              Compartilhar resumo
             </button>
             <p className={`dashboard-page__goal ${finance.goal.reached ? "text-success" : "text-warning"}`}>
               Meta do mês: {fmt(finance.monthly.savings)} / {fmt(finance.goal.value)}

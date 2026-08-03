@@ -11,7 +11,6 @@ function formatNumberForText(value) {
   const num = Number(value);
   if (isNaN(num)) return '0';
 
-  // Format as Brazilian currency without currency symbol
   return num.toLocaleString('pt-BR', {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
@@ -52,19 +51,19 @@ export function generateMonthlySummary(monthlyData, goal = 0) {
   const formattedGoal = formatNumberForText(goal);
 
   const goalStatus = goal > 0
-    ? (savings >= goal ? '🎉 Meta atingida!' : `📈 Faltam R$ ${formatNumberForText(goal - savings)}`)
+    ? (savings >= goal ? 'Meta batida ✅' : `Faltam R$ ${formatNumberForText(goal - savings)} para a meta`)
     : 'Nenhuma meta definida';
 
-  return `📊 Resumo Financeiro - ${monthName}
+  return `Resumo financeiro — ${monthName}
 
-💰 Receitas: R$ ${formattedIncomes}
-💸 Despesas: R$ ${formattedExpenses}
-💾 Economia: R$ ${formattedSavings}
+Receitas: R$ ${formattedIncomes}
+Despesas: R$ ${formattedExpenses}
+Economia: R$ ${formattedSavings}
 
-🎯 Meta mensal: R$ ${formattedGoal}
+Meta mensal: R$ ${formattedGoal}
 ${goalStatus}
 
-📱 Gerado pelo FluxoX - Controle suas finanças!`;
+Gerado pelo FluxoX`;
 }
 
 /**

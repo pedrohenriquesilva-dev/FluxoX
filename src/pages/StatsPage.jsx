@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import PropTypes from "prop-types";
 import PageHeader from "../components/ui/PageHeader.jsx";
 import StatCard from "../components/ui/StatCard.jsx";
+import Icon from "../components/ui/Icon.jsx";
 import { fmt } from "../utils/formatters.js";
 import "./StatsPage.css";
 
@@ -9,12 +10,10 @@ const MONTHS = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "
 
 export default function StatsPage({ expenses = [], incomes = [], finance }) {
   const stats = useMemo(() => {
-    // Totais gerais
     const totalExpenses = expenses.reduce((sum, exp) => sum + Number(exp.value || 0), 0);
     const totalIncomes = incomes.reduce((sum, inc) => sum + Number(inc.value || 0), 0);
     const netBalance = totalIncomes - totalExpenses;
 
-    // Recordes
     const highestExpense = expenses.reduce((max, exp) =>
       Number(exp.value || 0) > Number(max.value || 0) ? exp : max, {});
     const highestIncome = incomes.reduce((max, inc) =>
@@ -27,11 +26,9 @@ export default function StatsPage({ expenses = [], incomes = [], finance }) {
     const topCategory = Object.entries(mostExpensiveCategory)
       .sort(([,a], [,b]) => b - a)[0];
 
-    // Médias
     const avgExpense = expenses.length > 0 ? totalExpenses / expenses.length : 0;
     const avgIncome = incomes.length > 0 ? totalIncomes / incomes.length : 0;
 
-    // Preferências
     const paymentMethods = expenses.reduce((acc, exp) => {
       acc[exp.method] = (acc[exp.method] || 0) + 1;
       return acc;
@@ -46,7 +43,6 @@ export default function StatsPage({ expenses = [], incomes = [], finance }) {
     const favoriteCategory = Object.entries(categories)
       .sort(([,a], [,b]) => b - a)[0];
 
-    // Dados mensais para gráfico
     const monthlyData = MONTHS.map((month, index) => {
       const monthExpenses = expenses
         .filter(exp => new Date(exp.date).getMonth() === index)
@@ -64,7 +60,6 @@ export default function StatsPage({ expenses = [], incomes = [], finance }) {
       };
     });
 
-    // Máximo para normalizar barras
     const maxValue = Math.max(
       ...monthlyData.map(m => m.expenses),
       ...monthlyData.map(m => m.incomes)
@@ -90,43 +85,41 @@ export default function StatsPage({ expenses = [], incomes = [], finance }) {
   return (
     <section className="stats-page">
       <PageHeader
-        title="★ Estatísticas"
+        title="Estatísticas"
         subtitle="Seu ano financeiro em números, conquistas, recordes e padrões de consumo."
       />
 
-      {/* Overview Cards */}
       <div className="stats-page__overview">
         <StatCard
           title="Total de Receitas"
           value={fmt(stats.totalIncomes)}
-          icon="💰"
+          icon="incomes"
           trend="positive"
         />
         <StatCard
           title="Total de Despesas"
           value={fmt(stats.totalExpenses)}
-          icon="💸"
+          icon="expenses"
           trend="negative"
         />
         <StatCard
           title="Saldo Líquido"
           value={fmt(stats.netBalance)}
-          icon={stats.netBalance >= 0 ? "📈" : "📉"}
+          icon={stats.netBalance >= 0 ? "trendUp" : "trendDown"}
           trend={stats.netBalance >= 0 ? "positive" : "negative"}
         />
         <StatCard
           title="Transações Totais"
           value={stats.transactionCount.toString()}
-          icon="📊"
+          icon="conference"
         />
       </div>
 
-      {/* Recordes */}
       <div className="stats-page__section">
-        <h2 className="stats-page__section-title">🏆 Recordes do Ano</h2>
+        <h2 className="stats-page__section-title">Recordes do Ano</h2>
         <div className="stats-page__records">
           <div className="stats-page__record-card">
-            <span className="stats-page__record-icon">💸</span>
+            <Icon name="expenses" className="stats-page__record-icon" />
             <div className="stats-page__record-content">
               <h3>Maior Despesa</h3>
               <p className="stats-page__record-value text-danger">
@@ -139,7 +132,7 @@ export default function StatsPage({ expenses = [], incomes = [], finance }) {
           </div>
 
           <div className="stats-page__record-card">
-            <span className="stats-page__record-icon">💰</span>
+            <Icon name="incomes" className="stats-page__record-icon" />
             <div className="stats-page__record-content">
               <h3>Maior Receita</h3>
               <p className="stats-page__record-value text-success">
@@ -152,7 +145,7 @@ export default function StatsPage({ expenses = [], incomes = [], finance }) {
           </div>
 
           <div className="stats-page__record-card">
-            <span className="stats-page__record-icon">📊</span>
+            <Icon name="annual" className="stats-page__record-icon" />
             <div className="stats-page__record-content">
               <h3>Categoria Mais Cara</h3>
               <p className="stats-page__record-value text-danger">
@@ -166,12 +159,11 @@ export default function StatsPage({ expenses = [], incomes = [], finance }) {
         </div>
       </div>
 
-      {/* Médias */}
       <div className="stats-page__section">
-        <h2 className="stats-page__section-title">📈 Médias</h2>
+        <h2 className="stats-page__section-title">Médias</h2>
         <div className="stats-page__averages">
           <div className="stats-page__average-card">
-            <span className="stats-page__average-icon">💸</span>
+            <Icon name="expenses" className="stats-page__average-icon" />
             <div className="stats-page__average-content">
               <h3>Média por Despesa</h3>
               <p className="stats-page__average-value text-danger">
@@ -181,7 +173,7 @@ export default function StatsPage({ expenses = [], incomes = [], finance }) {
           </div>
 
           <div className="stats-page__average-card">
-            <span className="stats-page__average-icon">💰</span>
+            <Icon name="incomes" className="stats-page__average-icon" />
             <div className="stats-page__average-content">
               <h3>Média por Receita</h3>
               <p className="stats-page__average-value text-success">
@@ -192,12 +184,11 @@ export default function StatsPage({ expenses = [], incomes = [], finance }) {
         </div>
       </div>
 
-      {/* Preferências */}
       <div className="stats-page__section">
-        <h2 className="stats-page__section-title">🎯 Preferências</h2>
+        <h2 className="stats-page__section-title">Preferências</h2>
         <div className="stats-page__preferences">
           <div className="stats-page__preference-card">
-            <span className="stats-page__preference-icon">💳</span>
+            <Icon name="settings" className="stats-page__preference-icon" />
             <div className="stats-page__preference-content">
               <h3>Método de Pagamento Favorito</h3>
               <p className="stats-page__preference-value">
@@ -207,7 +198,7 @@ export default function StatsPage({ expenses = [], incomes = [], finance }) {
           </div>
 
           <div className="stats-page__preference-card">
-            <span className="stats-page__preference-icon">🏷️</span>
+            <Icon name="annual" className="stats-page__preference-icon" />
             <div className="stats-page__preference-content">
               <h3>Categoria Mais Usada</h3>
               <p className="stats-page__preference-value">
@@ -218,9 +209,8 @@ export default function StatsPage({ expenses = [], incomes = [], finance }) {
         </div>
       </div>
 
-      {/* Gráfico Mensal */}
       <div className="stats-page__section">
-        <h2 className="stats-page__section-title">📅 Visão Mensal</h2>
+        <h2 className="stats-page__section-title">Visão Mensal</h2>
         <div className="stats-page__monthly-chart">
           <div className="stats-page__month-bars">
             {stats.monthlyData.map((month, index) => (

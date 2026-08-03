@@ -47,13 +47,13 @@ export default function SavingsPage({
         [locationKey]: toNumber(value)
       }
     }));
-    toast.success(`Valor atualizado em ${LOCATIONS.find(loc => loc.key === locationKey)?.label || locationKey}!`);
+    toast.success(`Valor de ${LOCATIONS.find(loc => loc.key === locationKey)?.label || locationKey} atualizado.`);
   }
 
   return (
     <section className="savings-page">
       <PageHeader
-        title="Savings"
+        title="Reserva"
         subtitle="Informe quanto você possui em cada local e compare com o acumulado calculado."
       />
 

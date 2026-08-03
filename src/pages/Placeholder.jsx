@@ -1,38 +1,39 @@
+import Icon from "../components/ui/Icon.jsx";
 import "./Placeholder.css";
 
 const PAGE_INFO = {
   dashboard: {
-    icon: "\u{1F3E0}",
+    icon: "dashboard",
     title: "Dashboard",
     sub: "Visão geral das suas finanças pessoais."
   },
   expenses: {
-    icon: "\u{1F4B8}",
+    icon: "expenses",
     title: "Despesas",
     sub: "Acompanhe e organize todas as suas saídas."
   },
   incomes: {
-    icon: "\u{1F4B0}",
+    icon: "incomes",
     title: "Receitas",
     sub: "Registre entradas e fontes de renda."
   },
   annual: {
-    icon: "\u{1F4C5}",
+    icon: "annual",
     title: "Anual",
     sub: "Visualize o desempenho financeiro do ano."
   },
   savings: {
-    icon: "\u{1F4B5}",
+    icon: "savings",
     title: "Poupança",
     sub: "Planeje reservas e objetivos de economia."
   },
   conference: {
-    icon: "\u{1F4C8}",
+    icon: "conference",
     title: "Conferência",
     sub: "Confira consistência entre categorias e períodos."
   },
   settings: {
-    icon: "\u2699",
+    icon: "settings",
     title: "Configurações",
     sub: "Ajustes gerais do aplicativo FluxoX."
   }
@@ -43,9 +44,7 @@ export default function Placeholder({ page }) {
 
   return (
     <section className="placeholder">
-      <div className="placeholder__icon" aria-hidden="true">
-        {info.icon}
-      </div>
+      <Icon name={info.icon} className="placeholder__icon" />
       <h1 className="placeholder__title">{info.title}</h1>
       <p className="placeholder__sub text-muted">{info.sub}</p>
       <span className="placeholder__badge font-mono">em construção</span>

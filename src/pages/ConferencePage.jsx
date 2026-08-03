@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import PropTypes from "prop-types";
 import PageHeader from "../components/ui/PageHeader.jsx";
 import PeriodFilter from "../components/ui/PeriodFilter.jsx";
+import Icon from "../components/ui/Icon.jsx";
 import { financeShape } from "../utils/propTypes.js";
 import { fmt } from "../utils/formatters.js";
 import { filterByPeriod } from "../utils/filterByPeriod.js";
@@ -138,9 +139,12 @@ export default function ConferencePage({ finance, savingsByMonth = {}, expenses 
             {monthTransactions.map((transaction, idx) => (
               <div key={`${transaction.id}-${idx}`} className="conference-page__detail-item">
                 <div className="conference-page__detail-header">
-                  <span className="conference-page__detail-type">
-                    {transaction.type === "expense" ? "💸" : "💰"}
-                  </span>
+                  <Icon
+                    name={transaction.type === "expense" ? "expenses" : "incomes"}
+                    className={`conference-page__detail-type ${
+                      transaction.type === "expense" ? "text-danger" : "text-success"
+                    }`}
+                  />
                   <span className="conference-page__detail-description">
                     {transaction.description}
                   </span>

@@ -1,16 +1,17 @@
 import ThemeToggle from "./ThemeToggle.jsx";
+import Icon from "./Icon.jsx";
 import "./Sidebar.css";
 
 const NAV_ITEMS = [
-  { id: "dashboard", icon: "\u{1F3E0}", label: "Dashboard" },
-  { id: "expenses", icon: "\u{1F4B8}", label: "Despesas" },
-  { id: "incomes", icon: "\u{1F4B0}", label: "Receitas" },
-  { id: "annual", icon: "\u{1F4C5}", label: "Anual" },
-  { id: "savings", icon: "\u{1F4B5}", label: "Poupança" },
-  { id: "conference", icon: "\u{1F4C8}", label: "Conferência" },
-  { id: "reports", icon: "\u{1F4CA}", label: "Relatórios" },
-  { id: "stats", icon: "\u{1F4C8}", label: "★ Estatísticas" },
-  { id: "settings", icon: "\u2699", label: "Configura\u00e7\u00f5es" }
+  { id: "dashboard", icon: "dashboard", label: "Dashboard" },
+  { id: "expenses", icon: "expenses", label: "Despesas" },
+  { id: "incomes", icon: "incomes", label: "Receitas" },
+  { id: "annual", icon: "annual", label: "Anual" },
+  { id: "savings", icon: "savings", label: "Poupança" },
+  { id: "conference", icon: "conference", label: "Conferência" },
+  { id: "reports", icon: "annual", label: "Relatórios" },
+  { id: "stats", icon: "trendUp", label: "Estatísticas" },
+  { id: "settings", icon: "settings", label: "Configura\u00e7\u00f5es" }
 ];
 
 export default function Sidebar({ currentPage, onNavigate, isDark, onToggleTheme }) {
@@ -20,7 +21,9 @@ export default function Sidebar({ currentPage, onNavigate, isDark, onToggleTheme
     <aside className="sidebar">
       <div className="sidebar__top">
         <div className="sidebar__logo">
-          <div className="sidebar__logo-mark">{"\u{1F4B0}"}</div>
+          <div className="sidebar__logo-mark">
+            <Icon name="incomes" />
+          </div>
           <div>
             <div className="sidebar__logo-name">FluxoX</div>
             <div className="sidebar__logo-sub">Controle financeiro</div>
@@ -37,9 +40,7 @@ export default function Sidebar({ currentPage, onNavigate, isDark, onToggleTheme
             className={`sidebar__item ${currentPage === item.id ? "sidebar__item--active" : ""}`}
             onClick={() => onNavigate(item.id)}
           >
-            <span className="sidebar__item-icon" aria-hidden="true">
-              {item.icon}
-            </span>
+            <Icon name={item.icon} className="sidebar__item-icon" />
             <span>{item.label}</span>
           </button>
         ))}

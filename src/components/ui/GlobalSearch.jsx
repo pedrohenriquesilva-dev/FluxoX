@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import { fmt } from "../../utils/formatters.js";
 import useGlobalSearch from "../../hooks/useGlobalSearch.js";
+import Icon from "./Icon.jsx";
 import "./GlobalSearch.css";
 
 export default function GlobalSearch({
@@ -16,7 +17,6 @@ export default function GlobalSearch({
 
   const results = useGlobalSearch(expenses, incomes, query);
 
-  // Fechar dropdown ao clicar fora
   useEffect(() => {
     function handleClickOutside(event) {
       if (containerRef.current && !containerRef.current.contains(event.target)) {
@@ -44,7 +44,7 @@ export default function GlobalSearch({
   return (
     <div className="global-search" ref={containerRef}>
       <div className="global-search__input-wrapper">
-        <span className="global-search__icon">🔍</span>
+        <Icon name="search" className="global-search__icon" />
         <input
           ref={inputRef}
           type="text"
@@ -71,7 +71,7 @@ export default function GlobalSearch({
             type="button"
             aria-label="Limpar busca"
           >
-            ✕
+            <Icon name="close" />
           </button>
         )}
       </div>
@@ -88,9 +88,12 @@ export default function GlobalSearch({
                     type="button"
                   >
                     <div className="global-search__result-header">
-                      <span className="global-search__result-icon">
-                        {transaction.type === "expense" ? "💸" : "💰"}
-                      </span>
+                      <Icon
+                        name={transaction.type === "expense" ? "expenses" : "incomes"}
+                        className={`global-search__result-icon ${
+                          transaction.type === "expense" ? "text-danger" : "text-success"
+                        }`}
+                      />
                       <div className="global-search__result-main">
                         <span className="global-search__result-description">
                           {transaction.description}
@@ -119,7 +122,7 @@ export default function GlobalSearch({
             </ul>
           ) : (
             <div className="global-search__empty">
-              <span className="global-search__empty-icon">🚫</span>
+              <Icon name="empty" className="global-search__empty-icon" />
               <p>Nenhum resultado encontrado para "{query}"</p>
             </div>
           )}

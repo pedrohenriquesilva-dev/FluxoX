@@ -14,7 +14,6 @@ export default function useGlobalSearch(expenses = [], incomes = [], query = "")
     const searchTerm = query.toLowerCase();
     const results = [];
 
-    // Buscar em despesas
     expenses.forEach(expense => {
       if (
         expense.description?.toLowerCase().includes(searchTerm) ||
@@ -30,7 +29,6 @@ export default function useGlobalSearch(expenses = [], incomes = [], query = "")
       }
     });
 
-    // Buscar em receitas
     incomes.forEach(income => {
       if (
         income.description?.toLowerCase().includes(searchTerm) ||
@@ -46,7 +44,6 @@ export default function useGlobalSearch(expenses = [], incomes = [], query = "")
       }
     });
 
-    // Ordenar por data decrescente
     return results.sort((a, b) => new Date(b.date) - new Date(a.date));
   }, [expenses, incomes, query]);
 }

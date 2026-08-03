@@ -61,13 +61,13 @@ export default function IncomesPage({
       return [transaction, ...prev];
     });
     setEditingTransaction(null);
-    toast.success(editingTransaction ? "Receita atualizada com sucesso!" : "Receita adicionada com sucesso!");
+    toast.success(editingTransaction ? "Receita atualizada." : "Receita adicionada.");
   }
 
   function deleteTransaction(id) {
     onTransactionsChange?.((prev) => prev.filter((item) => item.id !== id));
     setEditingTransaction((prev) => (prev?.id === id ? null : prev));
-    toast.success("Receita excluída com sucesso!");
+    toast.success("Receita removida.");
   }
 
   return (
@@ -79,7 +79,7 @@ export default function IncomesPage({
           <ExportButton
             onExport={() => {
               exportIncomesToCSV(visibleTransactions);
-              toast.success("Receitas exportadas com sucesso!");
+              toast.success("CSV de receitas baixado.");
             }}
             label="Exportar Receitas"
           />

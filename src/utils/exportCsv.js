@@ -13,10 +13,8 @@ function arrayToCSV(data, headers) {
 
   const csvRows = [];
 
-  // Add headers
   csvRows.push(headers.join(','));
 
-  // Add data rows
   data.forEach(row => {
     const values = headers.map(header => {
       const value = row[header] || '';
@@ -80,7 +78,6 @@ function formatNumberForCSV(value) {
   const num = Number(value);
   if (isNaN(num)) return '0';
 
-  // Format as Brazilian currency without currency symbol
   return num.toLocaleString('pt-BR', {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2

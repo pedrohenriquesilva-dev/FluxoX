@@ -7,43 +7,36 @@ import "./ReportsPage.css";
 
 export default function ReportsPage({ expenses = [], incomes = [] }) {
   const reports = useMemo(() => {
-    // Totais gerais
     const totalExpenses = expenses.reduce((sum, exp) => sum + Number(exp.value || 0), 0);
     const totalIncomes = incomes.reduce((sum, inc) => sum + Number(inc.value || 0), 0);
     const netBalance = totalIncomes - totalExpenses;
 
-    // Totais por categoria (despesas)
     const expensesByCategory = expenses.reduce((acc, exp) => {
       const category = exp.category || "Outros";
       acc[category] = (acc[category] || 0) + Number(exp.value || 0);
       return acc;
     }, {});
 
-    // Totais por categoria (receitas)
     const incomesByCategory = incomes.reduce((acc, inc) => {
       const category = inc.category || "Outros";
       acc[category] = (acc[category] || 0) + Number(inc.value || 0);
       return acc;
     }, {});
 
-    // Totais por forma de pagamento
     const paymentsByMethod = expenses.reduce((acc, exp) => {
       const method = exp.method || "Outros";
       acc[method] = (acc[method] || 0) + Number(exp.value || 0);
       return acc;
     }, {});
 
-    // Top categorias de despesa
     const topExpenseCategories = Object.entries(expensesByCategory)
       .sort(([,a], [,b]) => b - a)
       .slice(0, 5);
 
-    // Top categorias de receita
     const topIncomeCategories = Object.entries(incomesByCategory)
       .sort(([,a], [,b]) => b - a)
       .slice(0, 5);
 
-    // Top formas de pagamento
     const topPaymentMethods = Object.entries(paymentsByMethod)
       .sort(([,a], [,b]) => b - a)
       .slice(0, 5);
@@ -68,41 +61,38 @@ export default function ReportsPage({ expenses = [], incomes = [] }) {
         subtitle="Análise detalhada de receitas, despesas e padrões de consumo."
       />
 
-      {/* Cards de resumo */}
       <div className="reports-page__summary">
         <StatCard
           title="Total de Receitas"
           value={fmt(reports.totalIncomes)}
-          icon="💰"
+          icon="incomes"
           trend="positive"
         />
         <StatCard
           title="Total de Despesas"
           value={fmt(reports.totalExpenses)}
-          icon="💸"
+          icon="expenses"
           trend="negative"
         />
         <StatCard
           title="Saldo Líquido"
           value={fmt(reports.netBalance)}
-          icon={reports.netBalance >= 0 ? "📈" : "📉"}
+          icon={reports.netBalance >= 0 ? "trendUp" : "trendDown"}
           trend={reports.netBalance >= 0 ? "positive" : "negative"}
         />
         <StatCard
           title="Transações Totais"
           value={`${expenses.length + incomes.length}`}
-          icon="📊"
+          icon="conference"
         />
       </div>
 
-      {/* Seção de categorias */}
       <div className="reports-page__section">
-        <h2 className="reports-page__section-title">📊 Análise por Categoria</h2>
+        <h2 className="reports-page__section-title">Análise por Categoria</h2>
 
         <div className="reports-page__grid">
-          {/* Top Despesas por Categoria */}
           <div className="reports-page__card">
-            <h3 className="reports-page__card-title">💸 Top Despesas por Categoria</h3>
+            <h3 className="reports-page__card-title">Top Despesas por Categoria</h3>
             <div className="reports-page__list">
               {reports.topExpenseCategories.map(([category, value], index) => (
                 <div key={category} className="reports-page__list-item">
@@ -124,9 +114,8 @@ export default function ReportsPage({ expenses = [], incomes = [] }) {
             </div>
           </div>
 
-          {/* Top Receitas por Categoria */}
           <div className="reports-page__card">
-            <h3 className="reports-page__card-title">💰 Top Receitas por Categoria</h3>
+            <h3 className="reports-page__card-title">Top Receitas por Categoria</h3>
             <div className="reports-page__list">
               {reports.topIncomeCategories.map(([category, value], index) => (
                 <div key={category} className="reports-page__list-item">
@@ -150,9 +139,8 @@ export default function ReportsPage({ expenses = [], incomes = [] }) {
         </div>
       </div>
 
-      {/* Seção de formas de pagamento */}
       <div className="reports-page__section">
-        <h2 className="reports-page__section-title">💳 Formas de Pagamento</h2>
+        <h2 className="reports-page__section-title">Formas de Pagamento</h2>
 
         <div className="reports-page__card">
           <h3 className="reports-page__card-title">Distribuição por Método</h3>
@@ -178,9 +166,8 @@ export default function ReportsPage({ expenses = [], incomes = [] }) {
         </div>
       </div>
 
-      {/* Tabela detalhada de categorias */}
       <div className="reports-page__section">
-        <h2 className="reports-page__section-title">📋 Detalhamento Completo</h2>
+        <h2 className="reports-page__section-title">Detalhamento Completo</h2>
 
         <div className="reports-page__table-wrap">
           <table className="reports-page__table">

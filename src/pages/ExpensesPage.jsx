@@ -43,13 +43,13 @@ export default function ExpensesPage({
       return [transaction, ...prev];
     });
     setEditingTransaction(null);
-    toast.success(editingTransaction ? "Despesa atualizada com sucesso!" : "Despesa adicionada com sucesso!");
+    toast.success(editingTransaction ? "Despesa atualizada." : "Despesa adicionada.");
   }
 
   function deleteTransaction(id) {
     onTransactionsChange?.((prev) => prev.filter((item) => item.id !== id));
     setEditingTransaction((prev) => (prev?.id === id ? null : prev));
-    toast.success("Despesa excluída com sucesso!");
+    toast.success("Despesa removida.");
   }
 
   return (
@@ -61,7 +61,7 @@ export default function ExpensesPage({
           <ExportButton
             onExport={() => {
               exportExpensesToCSV(visibleTransactions);
-              toast.success("Despesas exportadas com sucesso!");
+              toast.success("CSV de despesas baixado.");
             }}
             label="Exportar Despesas"
           />

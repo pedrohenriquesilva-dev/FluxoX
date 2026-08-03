@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import Icon from "./Icon.jsx";
 import "./ToastContainer.css";
 
 export default function ToastContainer({ toasts = [], onRemoveToast }) {
@@ -15,12 +16,7 @@ export default function ToastContainer({ toasts = [], onRemoveToast }) {
           aria-live="assertive"
         >
           <div className="toast__content">
-            <span className="toast__icon">
-              {toast.type === "success" && "✅"}
-              {toast.type === "error" && "❌"}
-              {toast.type === "warning" && "⚠️"}
-              {toast.type === "info" && "ℹ️"}
-            </span>
+            <Icon name={toast.type} className="toast__icon" />
             <span className="toast__message">{toast.message}</span>
           </div>
           <button
@@ -32,7 +28,7 @@ export default function ToastContainer({ toasts = [], onRemoveToast }) {
             type="button"
             aria-label="Fechar notificação"
           >
-            ✕
+            <Icon name="close" />
           </button>
         </div>
       ))}

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { generateMonthlySummary, copyToClipboard } from '../../utils/exportText.js';
+import Icon from './Icon.jsx';
 import './MonthlySummaryModal.css';
 
 export default function MonthlySummaryModal({ monthlyData, goal = 0, onClose }) {
@@ -50,7 +51,7 @@ export default function MonthlySummaryModal({ monthlyData, goal = 0, onClose }) 
             type="button"
             aria-label="Fechar modal"
           >
-            ✕
+            <Icon name="close" />
           </button>
         </header>
 
@@ -67,7 +68,7 @@ export default function MonthlySummaryModal({ monthlyData, goal = 0, onClose }) 
               disabled={isCopying}
               type="button"
             >
-              {isCopying ? 'Copiando...' : copySuccess ? '✅ Copiado!' : '📋 Copiar Texto'}
+              {isCopying ? 'Copiando...' : copySuccess ? 'Copiado!' : 'Copiar texto'}
             </button>
 
             {navigator.share && (
@@ -76,7 +77,7 @@ export default function MonthlySummaryModal({ monthlyData, goal = 0, onClose }) 
                 onClick={handleShare}
                 type="button"
               >
-                📤 Compartilhar
+                Compartilhar
               </button>
             )}
           </div>

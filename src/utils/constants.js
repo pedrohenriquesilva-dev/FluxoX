@@ -41,13 +41,13 @@ export const PAGE_IDS = {
 };
 
 export const PAGE_CONFIG = [
-  { id: PAGE_IDS.DASHBOARD, label: "Dashboard", icon: "\u{1F3E0}" },
-  { id: PAGE_IDS.EXPENSES, label: "Despesas", icon: "\u{1F4B8}" },
-  { id: PAGE_IDS.INCOMES, label: "Receitas", icon: "\u{1F4B0}" },
-  { id: PAGE_IDS.ANNUAL, label: "Anual", icon: "\u{1F4C5}" },
-  { id: PAGE_IDS.SAVINGS, label: "Reserva", icon: "\u{1F4B5}" },
-  { id: PAGE_IDS.CONFERENCE, label: "Confer\u00eancia", icon: "\u{1F4C8}" },
-  { id: PAGE_IDS.SETTINGS, label: "Configura\u00e7\u00f5es", icon: "\u2699" }
+  { id: PAGE_IDS.DASHBOARD, label: "Dashboard", icon: "dashboard" },
+  { id: PAGE_IDS.EXPENSES, label: "Despesas", icon: "expenses" },
+  { id: PAGE_IDS.INCOMES, label: "Receitas", icon: "incomes" },
+  { id: PAGE_IDS.ANNUAL, label: "Anual", icon: "annual" },
+  { id: PAGE_IDS.SAVINGS, label: "Reserva", icon: "savings" },
+  { id: PAGE_IDS.CONFERENCE, label: "Confer\u00eancia", icon: "conference" },
+  { id: PAGE_IDS.SETTINGS, label: "Configura\u00e7\u00f5es", icon: "settings" }
 ];
 
 export const DATE_FORMATS = {

@@ -7,8 +7,8 @@ export default function ThemeToggle({ isDark, onToggle }) {
       className="theme-toggle"
       onClick={onToggle}
       type="button"
-      aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
-      title={`Switch to ${isDark ? 'light' : 'dark'} mode`}
+      aria-label={`Mudar para modo ${isDark ? 'claro' : 'escuro'}`}
+      title={`Mudar para modo ${isDark ? 'claro' : 'escuro'}`}
     >
       {isDark ? (
         <svg
@@ -48,7 +48,7 @@ export default function ThemeToggle({ isDark, onToggle }) {
         </svg>
       )}
       <span className="theme-toggle__label">
-        {isDark ? 'Light' : 'Dark'}
+        {isDark ? 'Claro' : 'Escuro'}
       </span>
     </button>
   );

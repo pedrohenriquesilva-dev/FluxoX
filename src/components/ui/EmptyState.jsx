@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import Icon from "./Icon.jsx";
 import "./EmptyState.css";
 
 export default function EmptyState({
@@ -11,7 +12,7 @@ export default function EmptyState({
   return (
     <section className="empty-state" aria-labelledby="empty-state-title">
       <div className="empty-state__card">
-        <span className="empty-state__icon" aria-hidden="true">🧭</span>
+        <Icon name="empty" className="empty-state__icon" />
         <div className="empty-state__content">
           <h2 id="empty-state-title" className="empty-state__title">
             {title}

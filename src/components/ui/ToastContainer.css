@@ -69,9 +69,17 @@
   border-color: color-mix(in srgb, var(--success) 30%, var(--border));
 }
 
+.toast--success .toast__icon {
+  color: var(--success);
+}
+
 .toast--error {
   background: color-mix(in srgb, var(--danger) 15%, var(--card));
   border-color: color-mix(in srgb, var(--danger) 30%, var(--border));
+}
+
+.toast--error .toast__icon {
+  color: var(--danger);
 }
 
 .toast--warning {
@@ -79,9 +87,17 @@
   border-color: color-mix(in srgb, var(--warning) 30%, var(--border));
 }
 
+.toast--warning .toast__icon {
+  color: var(--warning);
+}
+
 .toast--info {
   background: color-mix(in srgb, var(--accent) 15%, var(--card));
   border-color: color-mix(in srgb, var(--accent) 30%, var(--border));
+}
+
+.toast--info .toast__icon {
+  color: var(--accent);
 }
 
 /* Animações */
